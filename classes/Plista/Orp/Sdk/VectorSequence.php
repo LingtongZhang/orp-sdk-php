@@ -47,6 +47,7 @@ class VectorSequence {
 	 * @param $type
 	 */
 	public function setType($type) {
+		$this->type = $type;
 	}
 
 	/**
@@ -72,6 +73,12 @@ class VectorSequence {
 		$this->timestamp = $timestamp;
 	}
 
+	/**
+	 * @return Type
+	 */
+	public function getType() {
+		return new Type($this->type);
+	}
 	/**
 	 * @return Context
 	 */

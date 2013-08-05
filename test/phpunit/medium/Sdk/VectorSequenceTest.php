@@ -84,8 +84,14 @@ class VectorSequenceTest extends PlistaTest {
 
 		$object = Sdk\VectorSequence::fromJson($example);
 
-		$this->assertEquals($object->getTimestamp()->getTimestampValue(), 1372175999641);
+		/**
+		 * testing Type values
+		 */
+		$this->assertEquals($object->getType()->getTypeValue(), impression);
 
+		/**
+		 * testing context values
+		 */
 		$this->assertEquals($object->getContext()->getGender(), array(7 => 255));    	//1
 		$this->assertEquals($object->getContext()->getAge(), array(12 , 13 , 42 , 90 , 46 , 29 , 19)); //2
 		$this->assertEquals($object->getContext()->getIncome(), array(43 , 24 , 44 , 105 , 20 , 16)); //3
@@ -103,8 +109,15 @@ class VectorSequenceTest extends PlistaTest {
 		$this->assertEquals($object->getContext()->getKeyword(), array(82427 => 11,8896 => 7,33453554 => 4,296087 => 3,56332 => 3, 689251 => 2, 27499 => 1, 32941772 => 1, 70764 => 1, 17128 => 0));    	 //33
 		$this->assertEquals($object->getContext()->getCategory_sem(), array(472441 => 255,472358 => 255, 472419 => 255));    		 //46
 
+		/**
+		 * testing recs values
+		 */
+		$this->assertEquals($object->getRecs()->getRecsValue(), array(130106300 , 84799192));
 
-		//$this->assertEquals($object->getRecs()->getInits)
+		/**
+		 * testing timestamp values
+		 */
+		$this->assertEquals($object->getTimestamp()->getTimestampValue(), 1372175999641);
 
 	}
 }

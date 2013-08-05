@@ -70,7 +70,7 @@ class Context {
 
 	private $data = array();
 
-	public function __construct($data) {  //war public
+	public function __construct($data) {
 		$this->data = $data;
 	}
 

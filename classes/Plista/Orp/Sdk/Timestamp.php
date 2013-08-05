@@ -6,12 +6,12 @@ class Timestamp {
 
 	private $data = array();
 
-	public function __construct($data) {  //war public
+	public function __construct($data) {
 		$this->data = $data;
 	}
 
 	public function getTimestampValue() {
-		return $this->data['timestamp'];
+		return $this->data;
 	}
 
 
