@@ -2,7 +2,7 @@
 namespace Plista\Orp\Sdk;
 
 use Plista\Orp\Sdk\API\Response\ScoredItemList;
-use Plista\Recommender\Algorithm\Base;
+use Plista\Orp\Algorithm\Base;
 use Plista\Vector\Context;
 use string;
 
@@ -19,22 +19,7 @@ final class Controller implements API\Service {  //ursprünglich ohne abstract
 	 * @param string $action
 	 * @throws ControllerException
 	 */
-	public function pushStatistic($algorithm, \VectorSequence $seq, $action) {
 
-		$classname = '\\Plista\\Recommender\\Algorithm\\' . $algorithm . '\\StatsStream';
-
-		/**
-		 * @var \Plista\Recommender\Algorithm\Base\PushStatistic $caller
-		 */
-		$caller = new $classname($seq, $action);
-
-		if (!$caller->isSupported()) {
-			throw new ControllerException('this action is not supported, callering this method was not useful');
-		}
-
-		$caller->validate();
-		$caller->push();
-	}
 	public function handle() {
 		/**
 		 * 	OAuth authentification
@@ -51,37 +36,69 @@ final class Controller implements API\Service {  //ursprünglich ohne abstract
 			$json_string = $_POST['push'];
 			$object = VectorSequence::fromJson($json_string);
 			if($object->getType()->getTypeValue() == "item")
-				pushItem($object);
+				$item = $object;
+				pushItem(\Item $item);
+			if($object->getType()->getTypeValue() == "statistic")
+				$seq = $object;
+				pushStatistic(\VectorSquence $seq);
 			if($object->getType()->getTypeValue() == "request")
-				pushRequest($object);
+				$context = $object;
+				pushRequest(Context $context);
 			if($object->getType()->getTypeValue() == "firc")
-				pushFirc($object);
+				$context = $object;
+				pushFirc(Context $context);
 		}
 		if( isset($_POST['fetch']))
 		{
 			$json_string = $_POST['fetch'];
 			$object = VectorSequence::fromJson($json_string);
 			if($object->getType()->getTypeValue() == "onsite")
-				fetchOnsite($object);
+				$context = $object;
+				fetchOnsite(Context $context);
 			if($object->getType()->getTypeValue() == "ad")
-				fetchAd($object);
+				$context = object;
+				fetchAd(Context $context);
 		}
 		if( isset($_POST['list']))
 		{
 			$json_string = $_POST['list'];
 			$object = VectorSequence::fromJson($json_string);
 			if($object->getType()->getTypeValue() == "algorithmus")
-				listAlgorithms($object);
+				listAlgorithms();
 		}
+	}
+	public function pushStatistic($algorithm, \VectorSequence $seq, $action) {
+
+		$classname = '\\Plista\\Orp\\Algorithm\\' . $algorithm . '\\StatsStream';
+
+		/**
+		 * @var \Plista\Recommender\Algorithm\Base\PushStatistic $caller
+		 */
+		$caller = new $classname($seq, $action);
+
+		if (!$caller->isSupported()) {
+			throw new ControllerException('this action is not supported, callering this method was not useful');
+		}
+
+		$caller->validate();
+		$caller->push();
 	}
 
 	function pushItem($algorithm, \Item $item) {
-		// TODO: Implement pushItem() method.
 
+
+		$classname = '\\Plista\\Orp\\Algorithm\\' . $algorithm . '\\ItemStream';
+
+
+		$caller = new $classname($item);
+		$caller->validate();
+		$caller->push();
 
 		/**
 		 * if user want to store data in database..
+		 *  ... under construction...
 		 */
+		/*
 		if(sql_storage === True)
 		{
 			//specify DB settings
@@ -115,24 +132,29 @@ final class Controller implements API\Service {  //ursprünglich ohne abstract
 
 
 		}
-
-		return new $item;
-
+		*/
 	}
 
 	function pushRequest($algorithm, Context $context) {
-		// TODO: Implement pushRequest() method.
-		//$context;
-
-		return new $context;
 
 
+		$classname = '\\Plista\\Orp\\Algorithm\\' . $algorithm . '\\RecommendationStream';
+
+
+		$caller = new $classname($context);
+		$caller->validate();
+		$caller->push();
 	}
 
 	function pushFirc($algorithm, Context $context) {
-		// TODO: Implement pushFirc() method.
 
-		return new $context;
+
+		$classname = '\\Plista\\Orp\\Algorithm\\' . $algorithm . '\\FircStream';
+
+
+		$caller = new $classname($context);
+		$caller->validate();
+		$caller->push();
 	}
 
 	/**
@@ -141,12 +163,19 @@ final class Controller implements API\Service {  //ursprünglich ohne abstract
 	 * @param int $limit
 	 * @return \Plista\Recommender\API\Response\ScoredItemList
 	 */
+
+
 	function fetchOnsite($algorithm, Context $context, $limit) {
-		// TODO: Implement fetchOnsite() method.
 
-		//using $algorithm to get $limit of $context
 
-		return new $limit;
+		$classname = '\\Plista\\Orp\\Algorithm\\' . $algorithm . '\\FetchOnsite';
+
+
+		$caller = new $classname($context);
+		$caller->validate();
+
+		return $caller->fetchOnsite($limit);
+	}
 	}
 
 	/**
@@ -156,19 +185,27 @@ final class Controller implements API\Service {  //ursprünglich ohne abstract
 	 * @return \Plista\Recommender\API\Response\ScoredItemList
 	 */
 	function fetchAd($algorithm, Context $context, $limit) {
-		// TODO: Implement fetchAd() method.
 
-		// using $algorithmus to get $limit of $context
 
-		return new ScoredItemList();
+		$classname = '\\Plista\\Orp\\Algorithm\\' . $algorithm . '\\FetchOnsite';
+
+
+		$caller = new $classname($context);
+		$caller->validate();
+
+		return $caller->fetchAd($limit);
 	}
 
 	/**
 	 * @return string[]
 	 */
 	function listAlgorithms() {
-		// TODO: Implement listAlgorithms() method.
 
-		return new string[];
+
+
+		$class = new \ReflectionClass($this);
+		$constants = $class->getConstants();
+
+		return array_values($constants);
 	}
 }
