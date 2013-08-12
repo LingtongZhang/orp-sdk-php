@@ -1,24 +1,23 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: jannik
- * Date: 05.08.13
- * Time: 14:00
- * To change this template use File | Settings | File Templates.
- */
-
 namespace Plista\Orp\Sdk;
 
 
 class Type {
 
-	private $data = array();
+	/**
+	 * @var string
+	 */
+	private $data;
 
 	public function __construct($data) {
 		$this->data = $data;
 	}
 
-	public function getTypeValue() {
+	/**
+	 * possible values are [impression, click, ...]
+	 * @return string
+	 */
+	public function getValue() {
 		return $this->data;
 	}
 }

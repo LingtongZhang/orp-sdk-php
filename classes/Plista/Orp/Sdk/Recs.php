@@ -12,7 +12,8 @@ namespace Plista\Orp\Sdk;
 
 class Recs {
 
-	const VALUE = 3;
+	const SCORE = 2;
+	const ITEM = 3;
 
 	private $data = array();
 
@@ -20,7 +21,17 @@ class Recs {
 		$this->data = $data;
 	}
 
-	public function getRecsValue() {
-		return $this->data['ints'][self::VALUE];
+	/**
+	 * @return int[]
+	 */
+	public function getItems() {
+		return $this->data['ints'][self::ITEM];
+	}
+
+	/**
+	 * @return float[]
+	 */
+	public function getScores() {
+		return $this->data['floats'][self::SCORE];
 	}
 }

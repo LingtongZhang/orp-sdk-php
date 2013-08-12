@@ -1,7 +1,6 @@
 <?php
 namespace Plista\Orp\Sdk;
 
-use Plista\Orp\Sdk\API\Response\ScoredItemList;
 use Plista\Orp\Algorithm\Base;
 use Plista\Vector\Context;
 use string;
@@ -10,6 +9,11 @@ use string;
  * SDK
  */
 final class Controller implements API\Service {  //ursprünglich ohne abstract
+
+	/**
+	 * @var Handle[]
+	 */
+	private $handler = array();
 
 	/**
 	 * subscription to the live statistics from hpt.
@@ -28,54 +32,55 @@ final class Controller implements API\Service {  //ursprünglich ohne abstract
 		//	Authorization: /* OAuth 2.0 token here */
 		//	Content-Type: application/json
 
-		//$json_string = file_get_contents("php://orp.plista.com/api.php?id=yourID");
+		// to get value as string from remote site
+		// $json_string = file_get_contents("php://orp.plista.com/api.php?id=yourID");
 
-
+		// values not specified which are supposed to check
+		// @todo: discuss with tobi, how this data is provided
 		if( isset($_POST['push']))
 		{
 			$json_string = $_POST['push'];
 			$object = VectorSequence::fromJson($json_string);
-			if($object->getType()->getTypeValue() == "item")
+			if($object->getType()->getValue() == "item")
 				$item = $object;
-				pushItem(\Item $item);
-			if($object->getType()->getTypeValue() == "statistic")
+				$this->pushItem($algorithm, $item);
+			if($object->getType()->getValue() == "statistic")
 				$seq = $object;
-				pushStatistic(\VectorSquence $seq);
-			if($object->getType()->getTypeValue() == "request")
+				$this->pushStatistic($algorithm, $seq, $action);
+			if($object->getType()->getValue() == "request")
 				$context = $object;
-				pushRequest(Context $context);
-			if($object->getType()->getTypeValue() == "firc")
+				$this->pushRequest($algorithm, $context);
+			if($object->getType()->getValue() == "firc")
 				$context = $object;
-				pushFirc(Context $context);
+				$this->pushFirc($algorithm, $context);
 		}
 		if( isset($_POST['fetch']))
 		{
 			$json_string = $_POST['fetch'];
 			$object = VectorSequence::fromJson($json_string);
-			if($object->getType()->getTypeValue() == "onsite")
+			if($object->getType()->getValue() == "onsite")
 				$context = $object;
-				fetchOnsite(Context $context);
-			if($object->getType()->getTypeValue() == "ad")
-				$context = object;
-				fetchAd(Context $context);
+				$this->fetchOnsite($algorithm, $context, $limit);
+			if($object->getType()->getValue() == "ad")
+				$context = $object;
+				$this->fetchAd($algorithm, $context, $limit);
 		}
 		if( isset($_POST['list']))
 		{
 			$json_string = $_POST['list'];
 			$object = VectorSequence::fromJson($json_string);
-			if($object->getType()->getTypeValue() == "algorithmus")
-				listAlgorithms();
+			if($object->getType()->getValue() == "algorithmus")
+				$this->listAlgorithms();
 		}
 	}
 	public function pushStatistic($algorithm, \VectorSequence $seq, $action) {
 
-		$classname = '\\Plista\\Orp\\Algorithm\\' . $algorithm . '\\StatsStream';
+		$classname = '\\Plista\\Orp\\Algorithm\\' . $algorithm . '\\pushStatistic';
 
-		/**
-		 * @var \Plista\Recommender\Algorithm\Base\PushStatistic $caller
-		 */
 		$caller = new $classname($seq, $action);
-
+		/**
+		 * @var pushStatistic $caller
+		 */
 		if (!$caller->isSupported()) {
 			throw new ControllerException('this action is not supported, callering this method was not useful');
 		}
@@ -86,11 +91,18 @@ final class Controller implements API\Service {  //ursprünglich ohne abstract
 
 	function pushItem($algorithm, \Item $item) {
 
+		if (isset($this->handler['pushItem'])) {
+			$caller = $this->handler['pushItem'];
+		} else {
+			$classname = '\\Plista\\Orp\\Algorithm\\' . $algorithm . '\\pushItem';
 
-		$classname = '\\Plista\\Orp\\Algorithm\\' . $algorithm . '\\ItemStream';
+			/**
+			 * @var PushItem $caller
+			 */
+			$caller = new $classname($item);
+		}
 
 
-		$caller = new $classname($item);
 		$caller->validate();
 		$caller->push();
 
@@ -98,6 +110,7 @@ final class Controller implements API\Service {  //ursprünglich ohne abstract
 		 * if user want to store data in database..
 		 *  ... under construction...
 		 */
+
 		/*
 		if(sql_storage === True)
 		{
@@ -119,7 +132,7 @@ final class Controller implements API\Service {  //ursprünglich ohne abstract
 
 			// writing data in MySQL DB
 			// manually and local assignment of numbers to original name
-			$db_query= "INSERT INTO user (ISP, OS)  VALUES ('$object->getContext()->getIsp()', '$object->getContext()->getOs()')";
+			$db_query= "INSERT INTO user (ISP, OS)  VALUES ('$object->getContext()->getIsp()', '$object->getContext()->getOs()')"; //add additionally values
 			if(mysql_query($db_query) === TRUE) {
 				echo '<font color="#008000">Writing SQL Data was successful ! </font>';
 			}
@@ -137,10 +150,11 @@ final class Controller implements API\Service {  //ursprünglich ohne abstract
 
 	function pushRequest($algorithm, Context $context) {
 
+		$classname = '\\Plista\\Orp\\Algorithm\\' . $algorithm . '\\pushRequest';
 
-		$classname = '\\Plista\\Orp\\Algorithm\\' . $algorithm . '\\RecommendationStream';
-
-
+		/**
+		 * @var pushRequest $caller
+		 */
 		$caller = new $classname($context);
 		$caller->validate();
 		$caller->push();
@@ -148,10 +162,11 @@ final class Controller implements API\Service {  //ursprünglich ohne abstract
 
 	function pushFirc($algorithm, Context $context) {
 
+		$classname = '\\Plista\\Orp\\Algorithm\\' . $algorithm . '\\PushFirc';
 
-		$classname = '\\Plista\\Orp\\Algorithm\\' . $algorithm . '\\FircStream';
-
-
+		/**
+		 * @var pushFirc $caller
+		 */
 		$caller = new $classname($context);
 		$caller->validate();
 		$caller->push();
@@ -167,16 +182,17 @@ final class Controller implements API\Service {  //ursprünglich ohne abstract
 
 	function fetchOnsite($algorithm, Context $context, $limit) {
 
-
 		$classname = '\\Plista\\Orp\\Algorithm\\' . $algorithm . '\\FetchOnsite';
 
-
+		/**
+		 * @var fetchOnsite $caller
+		 */
 		$caller = new $classname($context);
 		$caller->validate();
 
-		return $caller->fetchOnsite($limit);
+		return $caller->fetch($limit);
 	}
-	}
+
 
 	/**
 	 * @param string $algorithm
@@ -186,10 +202,11 @@ final class Controller implements API\Service {  //ursprünglich ohne abstract
 	 */
 	function fetchAd($algorithm, Context $context, $limit) {
 
+		$classname = '\\Plista\\Orp\\Algorithm\\' . $algorithm . '\\FetchAd';
 
-		$classname = '\\Plista\\Orp\\Algorithm\\' . $algorithm . '\\FetchOnsite';
-
-
+		/**
+		 * @var fetchAd $caller
+		 */
 		$caller = new $classname($context);
 		$caller->validate();
 
@@ -201,11 +218,17 @@ final class Controller implements API\Service {  //ursprünglich ohne abstract
 	 */
 	function listAlgorithms() {
 
-
-
 		$class = new \ReflectionClass($this);
 		$constants = $class->getConstants();
 
 		return array_values($constants);
 	}
+
+
+	public function setHandler($method, Handle $object) {
+		$this->handler[$method] = $object;
+
+	}
+
 }
+

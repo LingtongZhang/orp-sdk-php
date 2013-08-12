@@ -12,7 +12,7 @@ use Plista\Orp\Algorithm;
  * - ensemble will take care of caching
  * - more general concepts should be put into extra packages (see kornakapi model)
  *
- * @package Plista\Recommender\Algorithm\Base
+ * @package Plista\Orp\Algorithm\Base
  */
 abstract class Fetch extends Algorithm\Handle {
 

@@ -12,5 +12,6 @@ interface FetchAd {
 	 * @param int $limit
 	 */
 	public function fetch($limit);
-
+	public function validate();
+	public function fetchAd();
 }

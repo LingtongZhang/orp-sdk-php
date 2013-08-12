@@ -8,7 +8,7 @@ use Plista\Orp\Algorithm;
  * subscription to item updates
  * might be used by content based recommender services like Lucene to update the database
  */
-abstract class PushItem extends Algorithm\Handle {
+abstract class PushItem {
 
 	/**
 	 * @var \Item
@@ -38,8 +38,22 @@ abstract class PushItem extends Algorithm\Handle {
 		return true;
 	}
 
-	/**
-	 * @return void
-	 */
+
+	public function toJSON() {
+		$json = json_encode($this->getItem());
+
+		if ($json === false) {
+			throw new Exception('Could not encode message to JSON :( .');
+		}
+
+		return $json;
+	}
+
+	public function getPostData() {
+		return array(
+			'body' => $this->toJSON()
+		);
+	}
+
 	public abstract function push();
 }

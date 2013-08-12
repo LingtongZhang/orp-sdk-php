@@ -6,7 +6,7 @@ use Plista\Orp\Algorithm;
 
 /**
  * subscription to the live statistics from hpt.
- * @package Plista\Recommender\Algorithm\Base
+ * @package Plista\Orp\Algorithm\Base
  */
 abstract class PushStatistic extends Algorithm\Handle {
 	/**
