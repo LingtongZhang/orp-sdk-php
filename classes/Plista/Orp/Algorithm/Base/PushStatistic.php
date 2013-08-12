@@ -23,24 +23,18 @@ abstract class PushStatistic extends Algorithm\Handle {
 	 * @param \VectorSequence $seq
 	 * @param string $action
 	 */
-	public function __construct(\VectorSequence $seq, $action) {
+	public function __construct(EventNotification $seq, $notitype) {
 		$this->seq = $seq;
-		$this->action = $action;
+		$this->notitype = $notitype;
 	}
 
 	/**
 	 * @return string
 	 */
-	public final function getAction() {
-		return $this->action;
+	public final function getType() {
+		return $this->notitype;
 	}
 
-	/**
-	 * @return bool
-	 */
-	public final function isSupported() {
-		return in_array($this->getAction(), $this->action_supported);
-	}
 
 	/**
 	 * @throws \Plista\Recommender\Algorithm\Exception
@@ -52,5 +46,5 @@ abstract class PushStatistic extends Algorithm\Handle {
 	/**
 	 * @return void
 	 */
-	public abstract function push();
+	public abstract function handle();
 }

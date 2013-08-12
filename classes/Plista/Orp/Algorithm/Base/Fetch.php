@@ -14,12 +14,11 @@ use Plista\Orp\Algorithm;
  *
  * @package Plista\Orp\Algorithm\Base
  */
-abstract class Fetch extends Algorithm\Handle {
+abstract class Fetch extends Plista\Orp\Sdk\Handle {
 
 	/**
 	 * validate the current request
 	 * @return boolean
-	 * @throws \Plista\Recommender\Algorithm\Exception
 	 */
 	public function validate() {
 		// every request is valid per default
@@ -28,14 +27,12 @@ abstract class Fetch extends Algorithm\Handle {
 
 	/**
 	 * The keys that make the recommendation unique.
-	 * @return Recommender\Ensemble\Persistence\Settings|null
 	 */
 	public abstract function getPersistenceSettings();
 
 
 	/**
 	 * @param int $limit
-	 * @return Recommender\API\Response\ScoredItemList
 	 */
 	public abstract function fetch($limit);
 }

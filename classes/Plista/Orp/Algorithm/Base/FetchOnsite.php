@@ -6,18 +6,19 @@ namespace Plista\Orp\Sdk;
  * caching should be done somewhere else
  * @package Plista\Orp\Algorithm\Base
  */
-interface FetchOnsite {
+abstract class FetchOnsite {
+
 
 
 	/**
 	 * @param int $limit
 	 */
-	public function fetch($limit) {
+	abstract public function fetch() {
 
 	}
 
-	public function fetchOnsite($limit) {
-		return $this->fetch($limit);
+	abstract public  function fetchOnsite($limit) {
+
 	}
 
 	public function validate();
