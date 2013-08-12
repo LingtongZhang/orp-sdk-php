@@ -77,17 +77,24 @@ class VectorSequenceTest extends PlistaTest {
 			"recs": {
 						"ints": {
 							"3": [130106300 , 84799192]
-				}
+						}
+						"floats": {
+							"2": [0.4, 0.1]
+						}
 			},
 			"timestamp": 1372175999641
 			}';
+
+		// aussage von recs
+		// es gibt zwei item empfehlungen (konstante 3) , item 130106300 hat den score 0.4, item 84799192 hat den score 0.1
+		// TODO: discussion: man kann nur einen typen gleichzeitig anfragen !!!
 
 		$object = Sdk\VectorSequence::fromJson($example);
 
 		/**
 		 * testing Type values
 		 */
-		$this->assertEquals($object->getType()->getTypeValue(), impression);
+		$this->assertEquals($object->getType()->getValue(), impression);
 
 		/**
 		 * testing context values
@@ -112,7 +119,7 @@ class VectorSequenceTest extends PlistaTest {
 		/**
 		 * testing recs values
 		 */
-		$this->assertEquals($object->getRecs()->getRecsValue(), array(130106300 , 84799192));
+		$this->assertEquals($object->getRecs()->getValue(), array(130106300 , 84799192));
 
 		/**
 		 * testing timestamp values
