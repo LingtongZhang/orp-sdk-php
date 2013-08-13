@@ -21,18 +21,21 @@ final class Controller {
 	 * @throws ControllerException
 	 */
 	public function handle($type, $body) {
-
+		// Checking if the type of the JSON is supported
 		if ($type == 'recommendation_request' || 'event_notification' || 'item_update' || 'error_notification') {
-
+			//if so, decode the json (work with arrays)
 			$body = json_decode($body, true);
 
+			//check if the body of the JSON is an array
 			if(is_array($body) == false) {
+				// if not throw an exception
 				throw new Exception ('Error: body is not an array! ');
 			}
 
-
+			// using a gateway to handle the different types
 			switch ($type) {
 				case 'recommendation_request':
+					// checking for emptyness of handler
 					if (empty($this->handler['fetchOnsite'])) {
 						throw new Exception('Error: no handler registered for fetchOnsite');
 					}
@@ -43,7 +46,7 @@ final class Controller {
 
 					break;
 				case 'event_notification':
-
+					// checking for emptyness of handler
 					if (empty($this->handler['event_notification'])) {
 						throw new Exception('Error: no handler registered for event_notification');
 					}
@@ -61,29 +64,26 @@ final class Controller {
 					switch ($notitype) {
 						case 'click':
 							// call handler with notification type
-							//$handler->handleEvent($context, $notitype);
-							$this->pushStatistic($body, $notitype);
+							$handler->handle($body, $notitype);
 							break;
 						case 'impression':
 							// call handler with notification type
-							//$handler->handleEvent($context, $notitype);
-							$this->pushStatistic($body, $notitype);
+							$handler->handle($body, $notitype);
 							break;
 						case 'engagement':
 							// call handler with notification type
-							//$handler->handleEvent($context, $notitype);
-							$this->pushStatistic($body, $notitype);
+							$handler->handle($body, $notitype);
 							break;
 						case 'cpo':
 							// call handler with notification type
-							//$handler->handleEvent($context, $notitype);
-							$this->pushStatistic($body, $notitype);
+							$handler->handle($body, $notitype);
 							break;
 					}
 					*/
 
 					break;
 				case 'item_update':
+					// checking for emptyness of handler
 					if (empty($this->handler['item_update'])) {
 						throw new Exception('Error: no handler registered for item_update');
 					}
@@ -94,6 +94,7 @@ final class Controller {
 
 					break;
 				case 'error_notification':
+					// checking for emptyness of handler
 					if (empty($this->handler['error_notification'])) {
 						throw new Exception('Error: no handler registered for error_notification');
 					}
@@ -105,6 +106,7 @@ final class Controller {
 					break;
 			}
 		} else {
+			// if type is not supported, throw an exception
 		 	throw new Exception ('Error: the type is not supported');
 		}
 	}

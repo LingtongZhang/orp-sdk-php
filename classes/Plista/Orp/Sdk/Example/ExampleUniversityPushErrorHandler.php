@@ -6,7 +6,7 @@
  * Time: 16:09
  * To change this template use File | Settings | File Templates.
  */
-
+namespace Plista\Orp\Sdk\Example;
 class ExampleUniversityPushError {
 
 	public function handle($error) {

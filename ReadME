@@ -3,6 +3,3 @@
 In order to use our new ORP API we provide this SDK for our Developer!
 
 If you have trouble feel free to contact us :)
-
-Probleme:
-Recommander Struktur nicht "open sourcebar" - weil zu viele internen classen z.B. class HowToUseTheSdkTest extends PlistaTest

@@ -1,6 +1,7 @@
 <?php
+namespace Plista\Orp\Sdk\Example;
 
-class ExampleUniversityItemPushHandler extends \Plista\Orp\Sdk\Algorithm\Base\PushItem {
+class ExampleUniversityItemPushHandler extends \Plista\Orp\Algorithm\Base\PushItem {
 
 	public function handle($item) {
 

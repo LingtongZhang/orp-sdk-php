@@ -1,5 +1,4 @@
 <?php
-//namespace Plista\Orp\Sdk;
 namespace Plista\Orp\Algorithm\Base;
 
 use Plista\Orp;
@@ -9,7 +8,7 @@ use Plista\Orp\Algorithm;
  * subscription to the live statistics from hpt.
  * @package Plista\Orp\Algorithm\Base
  */
-abstract class PushStatistic extends Algorithm\Handle {
+abstract class PushStatistic  {
 	/**
 	 * @var string
 	 */

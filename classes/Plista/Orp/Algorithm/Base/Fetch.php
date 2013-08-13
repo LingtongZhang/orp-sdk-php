@@ -1,5 +1,4 @@
 <?php
-//namespace Plista\Orp\Algorithm\Base;
 namespace Plista\Orp\Algorithm\Base;
 
 use Plista\Orp;

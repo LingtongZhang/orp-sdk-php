@@ -1,5 +1,4 @@
 <?php
-//namespace Plista\Orp\Sdk;
 namespace Plista\Orp\Algorithm\Base;
 /**
  * fetchs the onsite recommendations

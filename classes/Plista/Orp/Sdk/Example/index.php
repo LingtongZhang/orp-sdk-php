@@ -19,13 +19,15 @@ $controller->setHandler('fetchOnSite', $handleFetch);
 $controller->setHandler('pushStatistic', $handleStatistic);
 $controller->setHandler('pushError', $handleError);
 
+//collecting type and body
 $type = $_POST['type'];
 $body = $_POST['body'];
 
+//checking if either body or type is empty
 if (empty($body) || empty($type)) {
 	die ('type or body emtpy');
 }
-
+// calling controller to handle incoming messages
 $controller->handle($type, $body);
 
 

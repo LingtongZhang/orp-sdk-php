@@ -1,5 +1,5 @@
 <?php
-
+namespace Plista\Orp\Sdk\Example;
 class ExampleUniversityModel  {
 
 	const ITEM = 3;

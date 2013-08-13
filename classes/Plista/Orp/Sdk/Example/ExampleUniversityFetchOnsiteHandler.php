@@ -1,6 +1,6 @@
 <?php
-//namespace Plista\Orp\Sdk\Example;
-class ExampleUniversityFetchOnsiteHandler extends \Plista\Orp\Sdk\Algorithm\Base\FetchOnsite {
+namespace Plista\Orp\Sdk\Example;
+class ExampleUniversityFetchOnsiteHandler extends \Plista\Orp\Algorithm\Base\FetchOnsite {
 
 	const SCORE = 2;
 	const ITEM = 3;
