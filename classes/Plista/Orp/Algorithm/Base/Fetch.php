@@ -1,5 +1,6 @@
 <?php
-namespace Plista\Orp\Sdk;
+//namespace Plista\Orp\Algorithm\Base;
+namespace Plista\Orp\Algorithm\Base;
 
 use Plista\Orp;
 use Plista\Orp\Algorithm;

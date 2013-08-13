@@ -11,7 +11,7 @@ class ExampleUniversityModel  {
 		$res = file_put_contents('items_'. $today . '.txt', $item, FILE_APPEND | LOCK_EX );
 
 		if (!$res) {
-			die ('Unable to write to item file :(');
+			die ('Error: Unable to write to item file :(');
 		}
 	}
 
@@ -22,7 +22,7 @@ class ExampleUniversityModel  {
 		$res = file_put_contents('statistic_'. $today . '.txt', $seq, FILE_APPEND | LOCK_EX );
 
 		if (!$res) {
-			die ('Unable to write to statistic file :(');
+			die ('Error: Unable to write to statistic file :(');
 		}
 	}
 
@@ -31,7 +31,7 @@ class ExampleUniversityModel  {
 		// writing errors in log file
 		$res = file_put_contents('log.txt',  $error );
 		if (!$res) {
-			die ('Unable to write to error file :(');
+			die ('Error: Unable to write to error file :(');
 		}
 	}
 
@@ -41,7 +41,7 @@ class ExampleUniversityModel  {
 		$res = file_put_contents('request_'. $today . '.txt',  $request );
 
 		if (!$res) {
-			die ('Unable to write to request file :(');
+			die ('Error: Unable to write to request file :(');
 		}
 	}
 

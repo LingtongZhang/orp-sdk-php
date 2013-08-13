@@ -11,7 +11,5 @@ class ExampleUniversityItemPushHandler extends \Plista\Orp\Sdk\Algorithm\Base\Pu
 		$model = new ExampleUniversityModel();
 		$model->write_item($item);
 
-
-
 	}
 }

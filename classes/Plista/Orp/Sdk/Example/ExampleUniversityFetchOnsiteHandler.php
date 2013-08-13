@@ -1,6 +1,6 @@
 <?php
 //namespace Plista\Orp\Sdk\Example;
-class ExampleUniversityItemPushHandler extends \Plista\Orp\Sdk\Algorithm\Base\FetchOnsite {
+class ExampleUniversityFetchOnsiteHandler extends \Plista\Orp\Sdk\Algorithm\Base\FetchOnsite {
 
 	const SCORE = 2;
 	const ITEM = 3;
@@ -28,17 +28,14 @@ class ExampleUniversityItemPushHandler extends \Plista\Orp\Sdk\Algorithm\Base\Fe
 	public function fetchOnsite($item_id, $result) {
 		$object = $this->fetch($item_id, $result);
 		$recommendation_proposal = $this->getPostData($object);
-		// curl_exec($recommendation_proposal);
 		return $recommendation_proposal;
-			//or throw new Exception('Could not response proposal :( .');
-
 	}
 
 	public function toJSON($object) {
 		$json_string = json_encode($object);
 
 		if ($json_string === false) {
-			throw new Exception('Could not encode message to JSON :( .');
+			throw new Exception('Error: Could not encode response to JSON :( .');
 		}
 
 		return $json_string;

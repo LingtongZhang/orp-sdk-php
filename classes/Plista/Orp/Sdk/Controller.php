@@ -34,7 +34,7 @@ final class Controller {
 			switch ($type) {
 				case 'recommendation_request':
 					if (empty($this->handler['fetchOnsite'])) {
-						throw new Exception('no handler registered for fetchOnsite');
+						throw new Exception('Error: no handler registered for fetchOnsite');
 					}
 					$handler = $this->handler['fetchOnsite'];
 
@@ -45,7 +45,7 @@ final class Controller {
 				case 'event_notification':
 
 					if (empty($this->handler['event_notification'])) {
-						throw new Exception('no handler registered for event_notification');
+						throw new Exception('Error: no handler registered for event_notification');
 					}
 					$handler = $this->handler['event_notification'];
 
@@ -85,7 +85,7 @@ final class Controller {
 					break;
 				case 'item_update':
 					if (empty($this->handler['item_update'])) {
-						throw new Exception('no handler registered for item_update');
+						throw new Exception('Error: no handler registered for item_update');
 					}
 					$handler = $this->handler['item_update'];
 
@@ -95,7 +95,7 @@ final class Controller {
 					break;
 				case 'error_notification':
 					if (empty($this->handler['error_notification'])) {
-						throw new Exception('no handler registered for error_notification');
+						throw new Exception('Error: no handler registered for error_notification');
 					}
 					$handler = $this->handler['error_notification'];
 
@@ -105,7 +105,7 @@ final class Controller {
 					break;
 			}
 		} else {
-		 	throw new Exception ('type is not supported');
+		 	throw new Exception ('Error: the type is not supported');
 		}
 
 

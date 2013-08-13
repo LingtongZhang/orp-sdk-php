@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-class ExampleUniverstiyPushStatistic extends \Plista\Orp\Sdk\Algorithm\Base\PushStatistic {
+class ExampleUniversityPushStatistic extends \Plista\Orp\Sdk\Algorithm\Base\PushStatistic {
 
 	public function handle($body) {
 		/**
@@ -16,16 +16,13 @@ class ExampleUniverstiyPushStatistic extends \Plista\Orp\Sdk\Algorithm\Base\Push
 
 		$model = new ExampleUniversityModel();
 		$model->write_statistic($body);
-
-
-
 	}
+
 	public function validate($seq) {
 		if (empty($data['notification_type'])) {
 			throw new Exception('empty notification type');
 		} else {
 			return true;
 		}
-
 	}
 }

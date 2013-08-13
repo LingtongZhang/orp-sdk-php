@@ -1,6 +1,6 @@
 <?php
 
-namespace PlistaTest\Orp\Large\Sdk;
+namespace PlistaTest\Orp\large\Sdk;
 use Plista\Orp\Sdk;
 use Plista\Util\PlistaTest;
 
@@ -37,10 +37,9 @@ class HowToUseTheSdkTest extends PlistaTest {
 
 	public function testGetEnabledIds() {
 
-
 		$controller = new Sdk\Controller();
 
-		$handle = new \ExampleUniversityItemPushHandler();
+		$handle = new ExampleUniversityItemPushHandler();
 		$controller->setHandler('pushItem', $handle);
 		$controller->setHandler('fetchOnsite', $handle);
 
