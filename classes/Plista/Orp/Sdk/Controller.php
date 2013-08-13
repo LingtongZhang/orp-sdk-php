@@ -14,197 +14,105 @@ final class Controller {
 	 */
 	private $handler = array();
 
-	protected static $algorithm = 'Base';
-
 	/**
 	 * subscription to the live statistics from hpt.
+	 * @param string $type the type of the incoming message ($_POST['type'])
+	 * @param string $body a json encoded message
 	 * @throws ControllerException
 	 */
+	public function handle($type, $body) {
 
-	public function handle() {
-		/**
-		 * 	OAuth authentification
-		 */
-		//	POST https://orp.plista.com/api?id=ResearcherID
-		//	Authorization: /* OAuth 2.0 token here */
-		//	Content-Type: application/json
+		if ($type == 'recommendation_request' || 'event_notification' || 'item_update' || 'error_notification') {
 
-		// to get value as string from remote site
-		// $json_string = file_get_contents("php://orp.plista.com/api.php?id=yourID");
+			$body = json_decode($body, true);
 
-		// values not specified which are supposed to check
-
-		$msgtype = $_POST['type'];
-		$json_string = $_POST['body'];
-
-		switch ($msgtype) {
-			case 'recommendation_request':
-				$request = json_decode($json_string);
-				$this->fetchOnsite($request);
-				break;
-			case 'event_notification':
-				// parse $json into vectorsequence
-				$context = json_decode($json_string);
-				// look at notification type
-				//$notitype = $context->type;
-				$notitype = $context->getType()->getValue();
-
-				switch ($notitype) {
-					case 'click':
-						// call handler with notification type
-						//$handler->handleEvent($context, $notitype);
-						$this->pushStatistic($context, $notitype);
-						break;
-					case 'impression':
-						// call handler with notification type
-						//$handler->handleEvent($context, $notitype);
-						$this->pushStatistic($context, $notitype);
-						break;
-					case 'engagement':
-						// call handler with notification type
-						//$handler->handleEvent($context, $notitype);
-						$this->pushStatistic($context, $notitype);
-						break;
-					case 'cpo':
-						// call handler with notification type
-						//$handler->handleEvent($context, $notitype);
-						$this->pushStatistic($context, $notitype);
-						break;
-				}
-				break;
-			case 'item_update':
-				$item = json_decode($json_string);
-				//$handler->handleItem($item);
-				$this->pushItem($item);
-				break;
-			case 'error_notification':
-				$error = json_decode($json_string);
-				//$handler->handleError($error);
-				$this->pushError($error);
-				break;
-		}
-
-
-		/*
-		 * old json gateway
-		 */
-		/*
-		if( isset($_POST['push'])) {
-			$json_string = $_POST['push'];
-			$object = VectorSequence::fromJson($json_string);
-
-			if ($object->getType()->getValue() == "item") {
-				$item = $object;
-				$this->pushItem($algorithm, $item);
+			if(is_array($body) == false) {
+				throw new Exception ('Error: body is not an array! ');
 			}
 
-			if ($object->getType()->getValue() == "statistic")
-				// TODO
-				$seq = $object;
-				$this->pushStatistic(static::$algorithm, $seq, $action);
 
-			if ($object->getType()->getValue() == "request")
-				$context = $object;
-				$this->pushRequest($algorithm, $context);
+			switch ($type) {
+				case 'recommendation_request':
+					if (empty($this->handler['fetchOnsite'])) {
+						throw new Exception('no handler registered for fetchOnsite');
+					}
+					$handler = $this->handler['fetchOnsite'];
 
-			if ($object->getType()->getValue() == "firc")
-				$context = $object;
-				$this->pushFirc($algorithm, $context);
-		}
+					$handler->validate();
+					$handler->handle($body);
 
-		if( isset($_POST['fetch'])) {
-			$json_string = $_POST['fetch'];
-			$object = VectorSequence::fromJson($json_string);
-			if($object->getType()->getValue() == "onsite")
-				$context = $object;
-				$this->fetchOnsite($algorithm, $context, $limit);
-			if($object->getType()->getValue() == "ad")
-				$context = $object;
-				$this->fetchAd($algorithm, $context, $limit);
-		}
+					break;
+				case 'event_notification':
 
-		if( isset($_POST['list'])) {
-			$json_string = $_POST['list'];
-			$object = VectorSequence::fromJson($json_string);
-			if($object->getType()->getValue() == "algorithmus")
-				$this->listAlgorithms();
-		}
-		 */
+					if (empty($this->handler['event_notification'])) {
+						throw new Exception('no handler registered for event_notification');
+					}
+					$handler = $this->handler['event_notification'];
 
-	}
+					$handler->validate();
+					$handler->handle($body);
 
-	public function pushStatistic(EventNotification $seq, $notitype) {
+					// Gateway for notification types
+					/*
+					// look at notification type
+					//$notitype = $context->type;
+					$notitype = $body->getType()->getValue();
 
-		$caller = new $classname($seq);
+					switch ($notitype) {
+						case 'click':
+							// call handler with notification type
+							//$handler->handleEvent($context, $notitype);
+							$this->pushStatistic($body, $notitype);
+							break;
+						case 'impression':
+							// call handler with notification type
+							//$handler->handleEvent($context, $notitype);
+							$this->pushStatistic($body, $notitype);
+							break;
+						case 'engagement':
+							// call handler with notification type
+							//$handler->handleEvent($context, $notitype);
+							$this->pushStatistic($body, $notitype);
+							break;
+						case 'cpo':
+							// call handler with notification type
+							//$handler->handleEvent($context, $notitype);
+							$this->pushStatistic($body, $notitype);
+							break;
+					}
+					*/
 
-		//before pushStatistic $caller
-		/**
-		 * @var /Plista/orp/Sdk/ExampleUniversityPushStatisticHandler $caller
-		 */
+					break;
+				case 'item_update':
+					if (empty($this->handler['item_update'])) {
+						throw new Exception('no handler registered for item_update');
+					}
+					$handler = $this->handler['item_update'];
 
-		/* Exception handling */
-		/*
+					$handler->validate();
+					$handler->handle($body);
 
-		 if (!$caller->isSupported()) {
-			throw new ControllerException('this action is not supported, callering this method was not useful');
-		 }
-		*/
+					break;
+				case 'error_notification':
+					if (empty($this->handler['error_notification'])) {
+						throw new Exception('no handler registered for error_notification');
+					}
+					$handler = $this->handler['error_notification'];
 
-		$caller->validate($seq);
-		$caller->handle($seq, $notitype);
-	}
+					$handler->validate();
+					$handler->handle($body);
 
-	public function pushItem(ItemUpdate $item) {
-
-		if (isset($this->handler['pushItem'])) {
-			$caller = $this->handler['pushItem'];
+					break;
+			}
 		} else {
-			$classname = '\\Plista\\Orp\\Algorithm\\' . $algorithm . '\\pushItem';
-
-			// before PushItem $caller
-			/**
-			 * @var /Plista/orp/Sdk/ExampleUniversityItemPushHandler $caller
-			 */
-			$caller = new $classname($item);
+		 	throw new Exception ('type is not supported');
 		}
 
-		$caller->validate($item);
-		$caller->handle($item);
 
 	}
-
-	public function pushError(ErrorNotification $error) {
-		/**
-		 * @var /Plista/orp/Sdk/ExampleUniversityPushErrorHandler $caller
-		 */
-		$caller = new $classname($error);
-		$caller->handle($error);
-	}
-
-
-	/**
-	 * @param int $limit
-	 */
-
-
-	public function fetchOnsite(RecommendationRequest $request) {
-
-
-		$classname = '\\Plista\\Orp\\Algorithm\\' . $algorithm . '\\FetchOnsite';
-
-		// before fetchOnsite $caller
-		/**
-		 * @var /Plista/orp/Sdk/ExampleUniversityFetchOnsiteHandler $caller
-		 */
-		$caller = new $classname($request);
-		$caller->handle($request);
-
-	}
-
 
 	public function setHandler($method, Handle $object) {
 		$this->handler[$method] = $object;
-
 	}
 
 }

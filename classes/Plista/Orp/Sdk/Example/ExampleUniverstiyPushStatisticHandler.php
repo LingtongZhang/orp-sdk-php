@@ -9,13 +9,23 @@
 
 class ExampleUniverstiyPushStatistic extends \Plista\Orp\Sdk\Algorithm\Base\PushStatistic {
 
-	public function handle($seq, $notitype) {
+	public function handle($body) {
 		/**
 		 * @var ExampleUniversityModel $model
 		 */
 
-		$model = new Model(); // dateinamen aus date(d-m-y)
-		$model->write_statistic($seq, $notitype); // file_put_contents(...)
+		$model = new ExampleUniversityModel();
+		$model->write_statistic($body);
+
+
+
+	}
+	public function validate($seq) {
+		if (empty($data['notification_type'])) {
+			throw new Exception('empty notification type');
+		} else {
+			return true;
+		}
 
 	}
 }

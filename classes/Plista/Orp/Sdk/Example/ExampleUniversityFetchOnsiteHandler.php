@@ -1,5 +1,5 @@
 <?php
-
+//namespace Plista\Orp\Sdk\Example;
 class ExampleUniversityItemPushHandler extends \Plista\Orp\Sdk\Algorithm\Base\FetchOnsite {
 
 	const SCORE = 2;
@@ -11,25 +11,27 @@ class ExampleUniversityItemPushHandler extends \Plista\Orp\Sdk\Algorithm\Base\Fe
 		 */
 		$limit = $request->limit;
 
-		$model = new Model();
+		$model = new ExampleUniversityModel();
 		$model->fetch($request, $limit);
 	}
 
 
 	private $data;
 
-	public function fetch($request_id, $result) {
+	public function fetch($item_id, $result) {
 
-		$this->data['recs']['ints'][self::ITEM] = $request_id;
+		$this->data['recs']['ints'][self::ITEM] = $item_id;
 		$this->data['recs']['floats'][self::SCORE] = $result;
 		return $this->data;
 	}
 
-	public function fetchOnsite($request_id, $result) {
-		$object = $this->fetch($request_id, $result);
-		$recommendation_proposal = curl_init($this->getPostData($object));
-		curl_exec($recommendation_proposal);
-			or throw new Exception('Could not response proposal :( .');
+	public function fetchOnsite($item_id, $result) {
+		$object = $this->fetch($item_id, $result);
+		$recommendation_proposal = $this->getPostData($object);
+		// curl_exec($recommendation_proposal);
+		return $recommendation_proposal;
+			//or throw new Exception('Could not response proposal :( .');
+
 	}
 
 	public function toJSON($object) {

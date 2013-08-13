@@ -1,7 +1,11 @@
 <?php
 
+$type = $_POST['type'];
+$body = $_POST['body'];
+
 $controller = new \Plista\Orp\Sdk\Controller();
-$controller->handle();
+$controller->handle($type, $body);
+
 //$controller->setHandler();
 
 // version 1
@@ -10,6 +14,9 @@ $controller->handle();
 // version 2
 // researcher wollen änderungen machen!!! sie wollen eigene datenbanken integrieren, etc
 // etwa so $controller->setHandler();
+
+
+
 
 
 

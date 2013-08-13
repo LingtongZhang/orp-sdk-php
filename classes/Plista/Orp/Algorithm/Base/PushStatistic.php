@@ -37,7 +37,7 @@ abstract class PushStatistic extends Algorithm\Handle {
 
 
 	/**
-	 * @throws \Plista\Recommender\Algorithm\Exception
+	 * @throws \Plista\Orp\Algorithm\Exception
 	 */
 	public function validate() {
 		throw new Algorithm\Exception('StatsStream not supported');

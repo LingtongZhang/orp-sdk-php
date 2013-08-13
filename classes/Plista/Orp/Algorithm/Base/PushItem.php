@@ -59,6 +59,6 @@ abstract class PushItem {
 		$ItemUpdate = curl_init($this->getPostData());
 		curl_exec($ItemUpdate);
 			or throw new Exception('Could not response Proposal :( .');
-	*/
 	}
+	*/
 }

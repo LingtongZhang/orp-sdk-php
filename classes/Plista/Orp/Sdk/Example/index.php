@@ -7,10 +7,20 @@
  * To change this template use File | Settings | File Templates.
  */
 
+$controller = new \Plista\Orp\Sdk\Controller();
+
 $handle = new \ExampleUniversityItemPushHandler();
+
 $controller->setHandler('pushItem', $handle);
 $controller->setHandler('fetchOnSite', $handle);
 $controller->setHandler('pushStatistic', $handle);
 $controller->setHandler('pushError', $handle);
 
-$handle->handle();
+$type = $_POST['type'];
+$body = $_POST['body'];
+
+if (empty($body) || empty($type)) {
+	die ('type or body emtpy');
+}
+
+$controller->handle($type, $body);

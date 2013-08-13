@@ -13,15 +13,17 @@ abstract class FetchOnsite {
 	/**
 	 * @param int $limit
 	 */
-	abstract public function fetch() {
+	public function fetch($item_id, $result) {
 
 	}
 
-	abstract public  function fetchOnsite($limit) {
+	 public function fetchOnsite($item_id, $result) {
 
 	}
 
-	public function validate();
+	public function validate() {
+
+	}
 
 
 }

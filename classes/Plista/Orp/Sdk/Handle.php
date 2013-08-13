@@ -4,6 +4,6 @@ namespace Plista\Orp\Sdk;
 interface Handle {
 
 	public function validate();
-	public function handle();
+	public function handle($body);
 
 }

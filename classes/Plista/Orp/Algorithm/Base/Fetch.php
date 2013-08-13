@@ -26,12 +26,6 @@ abstract class Fetch extends Plista\Orp\Sdk\Handle {
 	}
 
 	/**
-	 * The keys that make the recommendation unique.
-	 */
-	public abstract function getPersistenceSettings();
-
-
-	/**
 	 * @param int $limit
 	 */
 	public abstract function fetch($limit);
