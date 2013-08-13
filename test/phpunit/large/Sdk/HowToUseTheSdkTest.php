@@ -42,6 +42,8 @@ class HowToUseTheSdkTest extends PlistaTest {
 		$handle = new ExampleUniversityItemPushHandler();
 		$controller->setHandler('pushItem', $handle);
 		$controller->setHandler('fetchOnsite', $handle);
+		$controller->setHandler('pushStatistic', $handle);
+		$controller->setHandler('pushError', $handle);
 
 		/**
 		 * @var \Plista\Orp\Sdk\Controller $handle

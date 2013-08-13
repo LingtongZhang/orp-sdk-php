@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-class ExampleUniversityPushStatistic extends \Plista\Orp\Sdk\Algorithm\Base\PushStatistic {
+class ExampleUniversityPushStatisticHandler extends \Plista\Orp\Sdk\Algorithm\Base\PushStatistic {
 
 	public function handle($body) {
 		/**

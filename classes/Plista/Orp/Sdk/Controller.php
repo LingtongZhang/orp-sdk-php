@@ -107,8 +107,6 @@ final class Controller {
 		} else {
 		 	throw new Exception ('Error: the type is not supported');
 		}
-
-
 	}
 
 	public function setHandler($method, Handle $object) {

@@ -9,12 +9,15 @@
 
 $controller = new \Plista\Orp\Sdk\Controller();
 
-$handle = new \ExampleUniversityItemPushHandler();
+$handleItem = new \ExampleUniversityItemPushHandler();
+$handleFetch = new \ExampleUniversityFetchOnsiteHandler();
+$handleStatistic = new \ExampleUniversityPushStatisticHandler();
+$handleError = new \ExampleUniversityPushError();
 
-$controller->setHandler('pushItem', $handle);
-$controller->setHandler('fetchOnSite', $handle);
-$controller->setHandler('pushStatistic', $handle);
-$controller->setHandler('pushError', $handle);
+$controller->setHandler('pushItem', $handleItem);
+$controller->setHandler('fetchOnSite', $handleFetch);
+$controller->setHandler('pushStatistic', $handleStatistic);
+$controller->setHandler('pushError', $handleError);
 
 $type = $_POST['type'];
 $body = $_POST['body'];
@@ -24,3 +27,13 @@ if (empty($body) || empty($type)) {
 }
 
 $controller->handle($type, $body);
+
+
+/*
+$handle = new \ExampleUniversityItemPushHandler();
+
+$controller->setHandler('pushItem', $handle);
+$controller->setHandler('fetchOnSite', $handle);
+$controller->setHandler('pushStatistic', $handle);
+$controller->setHandler('pushError', $handle);
+ */
