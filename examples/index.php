@@ -10,5 +10,7 @@
 $handle = new \ExampleUniversityItemPushHandler();
 $controller->setHandler('pushItem', $handle);
 $controller->setHandler('fetchOnSite', $handle);
+$controller->setHandler('pushStatistic', $handle);
+$controller->setHandler('pushError', $handle);
 
 $handle->handle();
