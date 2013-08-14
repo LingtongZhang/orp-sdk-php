@@ -8,12 +8,22 @@ class ExampleUniversityModel  {
 	*/
 
 	const ITEM = 3;
+	public $path = '';  // z.B. /home/user/plista/orp/
 
 	public function write_item($item) {
 
 		$today = date("m.d.y");
 		// writing items in file
-		$res = file_put_contents('items_'. $today . '.txt',  serialize($item) .  "\n", FILE_APPEND | LOCK_EX );
+		$res = file_put_contents($this->path . 'items_'. $today . '.txt',  serialize($item) .  "\n", FILE_APPEND | LOCK_EX );
+
+		if (!$res) {
+			die ('Error: Unable to write to item file :(');
+		}
+	}
+
+	public function write_LastItemId($item_id) {
+		// writing items in file
+		$res = file_put_contents($this->path . 'LastItemId_.txt',  $item_id,  LOCK_EX );
 
 		if (!$res) {
 			die ('Error: Unable to write to item file :(');
@@ -24,7 +34,7 @@ class ExampleUniversityModel  {
 
 		$today = date("m.d.y");
 		// writing statistics in file
-		$res = file_put_contents('statistic_'. $today . '.txt', serialize($seq).  "\n", FILE_APPEND | LOCK_EX );
+		$res = file_put_contents($this->path . 'statistic_'. $today . '.txt', serialize($seq).  "\n", FILE_APPEND | LOCK_EX );
 
 		if (!$res) {
 			die ('Error: Unable to write to statistic file :(');
@@ -34,7 +44,7 @@ class ExampleUniversityModel  {
 	public function write_error($error) {
 		$today = date("m.d.y");
 		// writing errors in log file
-		$res = file_put_contents('error_' . $today . '.txt',   serialize($error).  "\n", FILE_APPEND | LOCK_EX  );
+		$res = file_put_contents($this->path . 'error_' . $today . '.txt',   serialize($error).  "\n", FILE_APPEND | LOCK_EX  );
 		if (!$res) {
 			die ('Error: Unable to write to error file :(');
 		}
@@ -43,18 +53,32 @@ class ExampleUniversityModel  {
 	public function write_request($request) {
 		$today = date("m.d.y");
 		// writing requests in file
-		$res = file_put_contents('request_'. $today . '.txt',   serialize($request).  "\n", FILE_APPEND | LOCK_EX  );
+		$res = file_put_contents($this->path . 'request_'. $today . '.txt',   serialize($request).  "\n", FILE_APPEND | LOCK_EX  );
 
 		if (!$res) {
 			die ('Error: Unable to write to request file :(');
 		}
 	}
 
+	public function getItemId() {
+
+		$item_id  = file_get_contents($this->path . 'LastItemId_.txt');
+		if (!$item_id) {
+			die ('Error: Unable to write to request file :(');
+		}
+		return $item_id;
+	}
+
 	public function fetch($request, $limit) {
 		// record the request in file
 		$this->write_request($request);
 		// getting item_id
-		$item_id = $request['recs']['ints'][self::ITEM];
+		$item_id = $this->getItemId();
+
+
+		if (!$item_id) {
+			die ('Error: $item_id is not supposed to be null :(');
+		}
 		// using algorithm in order to generate a recommendation
 		$result = $this->algorithm($request, $limit);
 

@@ -9,7 +9,7 @@ class ExampleUniversityFetchOnsiteHandler /*extends \Plista\Orp\Algorithm\Base\F
 		/**
 		 * @var ExampleUniversityModel $model
 		 */
-		$limit = $request->limit;
+		$limit = $request['limit'];
 
 		$model = new ExampleUniversityModel();
 		$model->fetch($request, $limit);

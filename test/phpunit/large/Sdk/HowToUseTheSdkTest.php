@@ -21,11 +21,11 @@ class HowToUseTheSdkTest extends PlistaTest {
 	private $type_notify =  "event_notification";
 
 	//item_update
-	private $body_item = '{"context":{"simple":{"4":154136,"56":1138207,"29":17332,"27":1677,"52":1,"14":74964,"39":10018,"16":48811,"7":18975,"25":135672799,"42":0,"19":52193,"24":0,"6":431260,"5":655,"47":504183,"18":0,"37":1521522,"59":1275566,"17":48985,"22":1192744,"31":0,"13":2,"9":26886,"23":13,"49":27,"35":315003,"57":0},"lists":{"8":[18841,18842,48511],"10":[4,5,10],"11":[13836]},"clusters":{"46":{"472366":255,"761805":255,"472364":255},"33":{"120979":8,"32942589":7,"467281":5,"97641":4,"6039":3,"781282":2,"2514003":2,"126430":2,"19565752":2,"19370":2,"252613":1,"176903":1,"106968":1,"32941951":1,"31926":1,"2068209":0},"51":{"1":255},"1":{"7":255},"2":[11,11,61,60,61,26,21],"3":[55,28,34,91,23,21]}},"recs":{"ints":{"3":[135417935]}},"notification_type":"impression","timestamp":1376047873577}';
+	private $body_item = '{"id":"130952812","domainid":"418"}';
 	private $type_item =  "item_update";
 
 	//error_notification
-	private $body_error = '{"context":{"simple":{"4":154136,"56":1138207,"29":17332,"27":1677,"52":1,"14":74964,"39":10018,"16":48811,"7":18975,"25":135672799,"42":0,"19":52193,"24":0,"6":431260,"5":655,"47":504183,"18":0,"37":1521522,"59":1275566,"17":48985,"22":1192744,"31":0,"13":2,"9":26886,"23":13,"49":27,"35":315003,"57":0},"lists":{"8":[18841,18842,48511],"10":[4,5,10],"11":[13836]},"clusters":{"46":{"472366":255,"761805":255,"472364":255},"33":{"120979":8,"32942589":7,"467281":5,"97641":4,"6039":3,"781282":2,"2514003":2,"126430":2,"19565752":2,"19370":2,"252613":1,"176903":1,"106968":1,"32941951":1,"31926":1,"2068209":0},"51":{"1":255},"1":{"7":255},"2":[11,11,61,60,61,26,21],"3":[55,28,34,91,23,21]}},"recs":{"ints":{"3":[135417935]}},"notification_type":"impression","timestamp":1376047873577}';
+	private $body_error = '';
 	private $type_error =  "error_notification";
 
 	//recommendation request
@@ -58,8 +58,8 @@ class HowToUseTheSdkTest extends PlistaTest {
 
 		// testing handling with sample data
 		$controller->handle($this->type_item, $this->body_item);         // is working -> writing item to  file
-		$controller->handle($this->type_error, $this->body_error);       // is working -> writing error to log file
-		$controller->handle($this->type_notify, $this->body_notify);     // is working -> writing notify to file
+		//$controller->handle($this->type_error, $this->body_error);       // is working -> writing error to log file
+		//$controller->handle($this->type_notify, $this->body_notify);     // is working -> writing notify to file
 		$controller->handle($this->type_request, $this->body_request);   //is working -> writing request to file and prints {"recs":{"ints":{"3":null},"floats":{"2":2}}} as answer
 	}
 
