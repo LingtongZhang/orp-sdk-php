@@ -23,7 +23,7 @@ class ExampleUniversityModel  {
 
 	public function write_LastItemId($item_id) {
 		// writing items in file
-		$res = file_put_contents($this->path . 'LastItemId_.txt',  $item_id,  LOCK_EX );
+		$res = file_put_contents($this->path . 'LastItemId.txt',  $item_id,  LOCK_EX );
 
 		if (!$res) {
 			die ('Error: Unable to write to item file :(');
@@ -62,7 +62,7 @@ class ExampleUniversityModel  {
 
 	public function getItemId() {
 
-		$item_id  = file_get_contents($this->path . 'LastItemId_.txt');
+		$item_id  = file_get_contents($this->path . 'LastItemId.txt');
 		if (!$item_id) {
 			die ('Error: Unable to write to request file :(');
 		}

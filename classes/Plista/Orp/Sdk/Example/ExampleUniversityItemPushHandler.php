@@ -3,7 +3,7 @@ namespace Plista\Orp\Sdk\Example;
 
 class ExampleUniversityItemPushHandler /*extends \Plista\Orp\Algorithm\Base\PushItem */ {
 
-	public $item_id;
+
 
 	public function handle($item) {
 

@@ -21,11 +21,11 @@ class HowToUseTheSdkTest extends PlistaTest {
 	private $type_notify =  "event_notification";
 
 	//item_update
-	private $body_item = '{"id":"130952812","domainid":"418"}';
+	private $body_item = '{"id":"130952812","domainid":"418","created_at":"2012-11-07 16:47:43","updated_at":"2013-06-26 10:56:51","flag":4,"title":"ORP stands for Open Recommendation Platform","text":"This article contains some UTF-8 encoded char\u00e4\u00f6cters.","url":"http://plista.com","img":"","version":2}';
 	private $type_item =  "item_update";
 
 	//error_notification
-	private $body_error = '';
+	private $body_error = '{"errorstructure":"undefined yet"}';
 	private $type_error =  "error_notification";
 
 	//recommendation request
@@ -58,8 +58,8 @@ class HowToUseTheSdkTest extends PlistaTest {
 
 		// testing handling with sample data
 		$controller->handle($this->type_item, $this->body_item);         // is working -> writing item to  file
-		//$controller->handle($this->type_error, $this->body_error);       // is working -> writing error to log file
-		//$controller->handle($this->type_notify, $this->body_notify);     // is working -> writing notify to file
+		$controller->handle($this->type_error, $this->body_error);       // is working -> writing error to log file
+		$controller->handle($this->type_notify, $this->body_notify);     // is working -> writing notify to file
 		$controller->handle($this->type_request, $this->body_request);   //is working -> writing request to file and prints {"recs":{"ints":{"3":null},"floats":{"2":2}}} as answer
 	}
 
