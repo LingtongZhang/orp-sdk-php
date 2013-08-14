@@ -4,11 +4,14 @@ class ExampleUniversityModel  {
 	/*
 	*  In order to write the array in the specified file, its important to serialize() the array.
 	*  If you want to file_get_contents be sure to unserialize() the content again.
-	*  The single entries are separated by a \n
+	*  Single entries are separated by a "\n"
 	*/
 
 	const ITEM = 3;
+
+	// if you want to save the files in a specific directory, you may want to adapt $path
 	public $path = '';  // z.B. /home/user/plista/orp/
+
 
 	public function write_item($item) {
 

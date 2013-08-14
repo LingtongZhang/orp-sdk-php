@@ -30,7 +30,6 @@ class VectorSequence {
 	 * @return \Plista\Orp\Sdk\VectorSequence
 	 */
 	public static function fromJson($str) {
-		// @todo:
 
 		$data = json_decode($str, true);
 

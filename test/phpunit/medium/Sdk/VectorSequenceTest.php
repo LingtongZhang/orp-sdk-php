@@ -2,14 +2,14 @@
 
 namespace PlistaTest\Orp\medium\Sdk;
 use Plista\Orp\Sdk;
-use Plista\Util\PlistaTest;
+
 
 require_once __DIR__ . '/../../../bootstrap.php';
 
 /**
  *
  */
-class VectorSequenceTest extends PlistaTest {
+class VectorSequenceTest  {
 
 	protected function setUp() {
 		parent::setUp();
@@ -85,11 +85,9 @@ class VectorSequenceTest extends PlistaTest {
 			"timestamp": 1372175999641
 			}';
 
-		// aussage von recs
-		// es gibt zwei item empfehlungen (konstante 3) , item 130106300 hat den score 0.4, item 84799192 hat den score 0.1
-		// TODO: discussion: man kann nur einen typen gleichzeitig anfragen !!!
 
-		$object = Sdk\VectorSequence::fromJson($example);
+
+		$object = \Plista\Orp\Sdk\VectorSequence::fromJson($example);
 
 		/**
 		 * testing Type values
@@ -106,7 +104,7 @@ class VectorSequenceTest extends PlistaTest {
 		$this->assertEquals($object->getContext()->getIsp(), 86);   	    	  	 //5
 		$this->assertEquals($object->getContext()->getOs(), 431247);   	    		 //6
 		$this->assertEquals($object->getContext()->getGeo_user(), null);     		 //7
-		$this->assertEquals($object->getContext()->getPublisher_filter(), array(18841, 18842, 48511));         //8 supposed to be [18841 , 18842 , 48511] instead saying "array"
+		$this->assertEquals($object->getContext()->getPublisher_filter(), array(18841, 18842, 48511));         //8
 		$this->assertEquals($object->getContext()->getGeo_user(), null);    		 //9
 		$this->assertEquals($object->getContext()->getChannel(), array(9, 10)); 	//10
 		$this->assertEquals($object->getContext()->getCategory(), array(2045611)); 	//11
@@ -119,7 +117,7 @@ class VectorSequenceTest extends PlistaTest {
 		/**
 		 * testing recs values
 		 */
-		$this->assertEquals($object->getRecs()->getValue(), array(130106300 , 84799192));
+		$this->assertEquals($object->getRecs()->getScores(), array(130106300 , 84799192));
 
 		/**
 		 * testing timestamp values
