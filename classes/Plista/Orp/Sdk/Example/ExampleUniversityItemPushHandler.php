@@ -12,11 +12,12 @@ class ExampleUniversityItemPushHandler implements Handle /*extends \Plista\Orp\A
 		 * @var ExampleUniversityModel $model
 		 */
 		$item_id = $item['id'];
+		$publisherid = $item['domainid'];
 
 		$model = new ExampleUniversityModel();
 		// writing body informations to file
-		$model->write_item($item);
-		$model->write_LastItemId($item_id);
+		$model->write_item($item, $publisherid);
+		$model->write_publisherid($publisherid);
 
 	}
 

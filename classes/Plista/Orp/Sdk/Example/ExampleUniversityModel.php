@@ -12,25 +12,32 @@ class ExampleUniversityModel  {
 	// if you want to save the files in a specific directory, you may want to adapt $path
 	public $path = '';  // z.B. /home/user/plista/orp/
 
-
-	public function write_item($item) {
+	/**
+	 * @param int $publisherid
+	 */
+	/*
+	public function __construct($publisherid) {
+		$this->publisherid = $publisherid;
+	}
+	*/
+	public function write_item($item, $publisherid) {
 
 		$today = date("m.d.y");
 		// writing items in file
-		$res = file_put_contents($this->path . 'items_'. $today . '.txt',  serialize($item) .  "\n", FILE_APPEND | LOCK_EX );
+		$res = file_put_contents($this->path . $publisherid . '_items_'. $today . '.txt',  serialize($item) .  "\n", FILE_APPEND | LOCK_EX );
 
 		if (!$res) {
 			die ('Error: Unable to write to item file :(');
 		}
 	}
 
-	public function write_LastItemId($item_id) {
+	public function write_publisherId($publisherid) {
 		// writing the current item_id in file
 		// the file is supposed to contain only the last ID
-		$res = file_put_contents($this->path . 'LastItemId.txt',  $item_id, LOCK_EX );
+		$res = file_put_contents($this->path . 'publisherID.txt',   $publisherid,  LOCK_EX );
 
 		if (!$res) {
-			die ('Error: Unable to write to item file :(');
+			die ('Error: Unable to write to publisherID file :(');
 		}
 	}
 
@@ -64,21 +71,21 @@ class ExampleUniversityModel  {
 		}
 	}
 
-	public function getItemId() {
+	public function getPublisherId() {
 		// reading the last item ID from file
-		$item_id  = file_get_contents($this->path . 'LastItemId.txt');
-		if (!$item_id) {
+		$publisherid  = file_get_contents($this->path . 'publisherID.txt');
+		if (!$publisherid) {
 			die ('Error: Unable to write to request file :(');
 		}
-		return $item_id;
+		return $publisherid;
 	}
 
 	public function fetch($request, $limit) {
 		// record the request in file
 		$this->write_request($request);
 		// getting item_id
-		$item_id = $this->getItemId();
-		if (!$item_id) {
+		$publisherid = $this->getPublisherId();
+		if (!$publisherid) {
 			die ('Error: $item_id is not supposed to be null :(');
 		}
 		// using algorithm in order to generate a recommendation
@@ -97,34 +104,40 @@ class ExampleUniversityModel  {
 	 * http://en.wikipedia.org/wiki/Behavioral_targeting
 	 */
 	public function  algorithm_score($request, $limit) {
-		// here goes your algorithm
-
-		// creating  numbers
+		// creating numbers
 		$c = 0;
 		$score = array();
 
 		while($c < $limit) {
-			$v = (float)rand()/(float)getrandmax();
+			if ($c==0) {
+				$v =1;
+			} else {
+			$v = 1/$c;
+			}
 			$score[] = $v;
 			$c++;
 		}
+
 		return $score;
 	}
+
 	public function algorithm_item($request, $limit) {
 		// here goes your algorithm
 
-
-		// creating numbers
-		$c = 0;
 		$item = array();
-
-		while($c < $limit) {
-			$v = rand(1,999);
-			$item[] = $v;
-			$c++;
+		$today = date("m.d.y");
+		$publisherid = $this->getPublisherId();
+		if (!$publisherid) {
+			die ('Error: $item_id is not supposed to be null :(');
 		}
+		$file = file($this->path . $publisherid . '_items_'. $today . '.txt');
 
+		for ($c = count($file)-$limit; $c < count($file); $c++) {
+			$object = $file[$c];
+			$object = unserialize($object);
+			print_r($object);
+			$item[] = $object['id'];
+		}
 		return $item;
 	}
-
 }
