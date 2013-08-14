@@ -1,6 +1,8 @@
 <?php
 namespace Plista\Orp\Sdk\Example;
-class ExampleUniversityFetchOnsiteHandler /*extends \Plista\Orp\Algorithm\Base\FetchOnsite*/ {
+use Plista\Orp\Sdk\Handle;
+
+class ExampleUniversityFetchOnsiteHandler  implements Handle /*extends \Plista\Orp\Algorithm\Base\FetchOnsite*/ {
 
 	const SCORE = 2;
 	const ITEM = 3;
@@ -20,8 +22,8 @@ class ExampleUniversityFetchOnsiteHandler /*extends \Plista\Orp\Algorithm\Base\F
 
 	public function fetch($item_id, $result) {
 		// collecting item_id and result (recommendation)
-		$this->data['recs']['ints'][self::ITEM] = $item_id;
-		$this->data['recs']['floats'][self::SCORE] = $result;
+		$this->data['recs']['ints'][self::ITEM] = $result;
+		$this->data['recs']['floats'][self::SCORE] = $item_id;
 		return $this->data;
 	}
 

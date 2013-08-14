@@ -1,6 +1,8 @@
 <?php
 namespace Plista\Orp\Sdk\Example;
-class ExampleUniversityPushStatisticHandler /* extends \Plista\Orp\Algorithm\Base\PushStatistic */ {
+use Plista\Orp\Sdk\Handle;
+
+class ExampleUniversityPushStatisticHandler implements Handle /* extends \Plista\Orp\Algorithm\Base\PushStatistic */ {
 
 	public function handle($body) {
 		/**

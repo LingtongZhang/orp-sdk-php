@@ -27,7 +27,7 @@ class ExampleUniversityModel  {
 	public function write_LastItemId($item_id) {
 		// writing the current item_id in file
 		// the file is supposed to contain only the last ID
-		$res = file_put_contents($this->path . 'LastItemId.txt',  $item_id,  LOCK_EX );
+		$res = file_put_contents($this->path . 'LastItemId.txt',  $item_id, LOCK_EX );
 
 		if (!$res) {
 			die ('Error: Unable to write to item file :(');
@@ -82,18 +82,49 @@ class ExampleUniversityModel  {
 			die ('Error: $item_id is not supposed to be null :(');
 		}
 		// using algorithm in order to generate a recommendation
-		$result = $this->algorithm($request, $limit);
+		$item = $this->algorithm_item($request, $limit);
+		$score = $this->algorithm_score($request, $limit);
 
 		$fetchOnsiteHandler = new ExampleUniversityFetchOnsiteHandler();
-		$fetchOnsiteHandler->fetchOnsite($item_id, $result);
+		$fetchOnsiteHandler->fetchOnsite($score, $item);
 
 	}
 
-	public function algorithm($request, $limit) {
-
+	/*
+	 * These algorithmen are generating random numbers for testing.
+	 * You may want to have a look at current methodes like
+	 * http://en.wikipedia.org/wiki/Collaborative_filtering
+	 * http://en.wikipedia.org/wiki/Behavioral_targeting
+	 */
+	public function  algorithm_score($request, $limit) {
 		// here goes your algorithm
 
-		return 2; //an example result
+		// creating  numbers
+		$c = 0;
+		$score = array();
+
+		while($c < $limit) {
+			$v = (float)rand()/(float)getrandmax();
+			$score[] = $v;
+			$c++;
+		}
+		return $score;
+	}
+	public function algorithm_item($request, $limit) {
+		// here goes your algorithm
+
+
+		// creating numbers
+		$c = 0;
+		$item = array();
+
+		while($c < $limit) {
+			$v = rand(1,999);
+			$item[] = $v;
+			$c++;
+		}
+
+		return $item;
 	}
 
 }

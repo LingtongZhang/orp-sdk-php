@@ -1,6 +1,8 @@
 <?php
 namespace Plista\Orp\Sdk\Example;
-class ExampleUniversityPushErrorHandler {
+use Plista\Orp\Sdk\Handle;
+
+class ExampleUniversityPushErrorHandler implements Handle  {
 
 	public function handle($error) {
 		/**

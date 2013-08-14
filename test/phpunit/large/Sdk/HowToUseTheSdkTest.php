@@ -6,14 +6,14 @@ use Plista\Orp\Sdk\Example\ExampleUniversityFetchOnsiteHandler;
 use Plista\Orp\Sdk\Example\ExampleUniversityPushErrorHandler;
 use Plista\Orp\Sdk\Example\ExampleUniversityPushStatisticHandler;
 use Plista\Orp\Sdk;
-use Plista\Util\PlistaTest;
+
 
 require_once __DIR__ . '/../../../bootstrap.php';
 
 /**
  *
  */
-class HowToUseTheSdkTest extends PlistaTest {
+class HowToUseTheSdkTest  /*extends phpunit*/ {
 	//sample data
 
 	//event notification
@@ -58,11 +58,13 @@ class HowToUseTheSdkTest extends PlistaTest {
 
 		// testing handling with sample data
 		$controller->handle($this->type_item, $this->body_item);         // is working -> writing item to  file
-		$controller->handle($this->type_error, $this->body_error);       // is working -> writing error to log file
-		$controller->handle($this->type_notify, $this->body_notify);     // is working -> writing notify to file
+		//$controller->handle($this->type_error, $this->body_error);       // is working -> writing error to log file
+		//$controller->handle($this->type_notify, $this->body_notify);     // is working -> writing notify to file
 		$controller->handle($this->type_request, $this->body_request);   //is working -> writing request to file and prints {"recs":{"ints":{"3":null},"floats":{"2":2}}} as answer
 	}
 
 }
 
 
+$t = new HowToUseTheSdkTest();
+$t->testGetEnabledIds();
