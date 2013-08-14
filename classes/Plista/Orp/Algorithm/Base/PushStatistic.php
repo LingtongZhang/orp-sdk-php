@@ -39,12 +39,15 @@ abstract class PushStatistic  {
 	/**
 	 * @throws \Plista\Orp\Algorithm\Exception
 	 */
-	public function validate() {
+	public function validate($body) {
 		throw new Algorithm\Exception('StatsStream not supported');
 	}
 
 	/**
 	 * @return void
 	 */
-	public abstract function handle();
+	public function handle($body) {
+
+	}
+
 }

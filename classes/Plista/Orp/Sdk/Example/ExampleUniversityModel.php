@@ -55,7 +55,7 @@ class ExampleUniversityModel  {
 		$this->write_request($request);
 		// getting item_id
 		$item_id = $request['recs']['ints'][self::ITEM];
-		// using algorithm in order to generate a recommandation
+		// using algorithm in order to generate a recommendation
 		$result = $this->algorithm($request, $limit);
 
 		$fetchOnsiteHandler = new ExampleUniversityFetchOnsiteHandler();

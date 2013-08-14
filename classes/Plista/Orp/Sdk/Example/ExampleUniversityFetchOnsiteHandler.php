@@ -19,7 +19,7 @@ class ExampleUniversityFetchOnsiteHandler /*extends \Plista\Orp\Algorithm\Base\F
 	private $data;
 
 	public function fetch($item_id, $result) {
-		// collecting item_id and result (recommandation)
+		// collecting item_id and result (recommendation)
 		$this->data['recs']['ints'][self::ITEM] = $item_id;
 		$this->data['recs']['floats'][self::SCORE] = $result;
 		return $this->data;
@@ -30,12 +30,12 @@ class ExampleUniversityFetchOnsiteHandler /*extends \Plista\Orp\Algorithm\Base\F
 		$object = $this->fetch($item_id, $result);
 		// wrapping things up and getting ready to transmit
 		$recommendation_proposal = $this->getPostData($object);
-		//providing recommandation to plista
+		//providing recommendation to plista
 		print $recommendation_proposal;
 	}
 
 	public function toJSON($object) {
-		// encoding recommandation
+		// encoding recommendation
 		$json_string = json_encode($object);
 
 		if ($json_string === false) {

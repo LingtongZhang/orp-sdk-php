@@ -22,44 +22,20 @@ abstract class PushItem {
 	}
 
 	/**
-	 * @return \Item
+	 * @param $item \Item $item
 	 */
-	protected function getItem() {
-		return $this->item;
+	public function handle(\Item $item) {
+
+
 	}
 
 	/**
 	 * validate the current request
+	 * @param \Item $item
 	 * @return boolean
 	 */
-	public function validate() {
+	public function validate($item) {
 		return true;
 	}
 
-	/*
-		public abstract function push();
-
-		/*
-		public function toJSON() {
-			$json = json_encode($this->getItem());
-
-			if ($json === false) {
-				throw new Exception('Could not encode message to JSON :( .');
-			}
-
-			return $json;
-		}
-
-		public function getPostData() {
-			return array(
-				'body' => $this->toJSON()
-			);
-		}
-
-		public function push() {  				 // ursp. public abstract function
-			$ItemUpdate = curl_init($this->getPostData());
-			curl_exec($ItemUpdate);
-				or throw new Exception('Could not response Proposal :( .');
-		}
-		*/
 }
