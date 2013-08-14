@@ -25,7 +25,7 @@ class HowToUseTheSdkTest extends PlistaTest {
 	private $type_item =  "item_update";
 
 	//error_notification
-	private $body_error = '{"errorstructure":"undefined yet"}';
+	private $body_error = '{"id": 1114,"code": 440,"timestamp": 1376482070,"message": "empty response"}';
 	private $type_error =  "error_notification";
 
 	//recommendation request
