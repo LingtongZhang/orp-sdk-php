@@ -14,7 +14,7 @@ class ExampleUniversityPushError {
 		 * @var ExampleUniversityModel $model
 		 */
 
-		$model = new Model(); // dateinamen aus date(d-m-y)
-		$model->write_error($error); // file_put_contents(...)
+		$model = new ExampleUniversityModel();
+		$model->write_error($error);
 	}
 }

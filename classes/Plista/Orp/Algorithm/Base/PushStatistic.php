@@ -1,5 +1,6 @@
 <?php
-namespace Plista\Orp\Sdk;
+//namespace Plista\Orp\Sdk;
+namespace Plista\Orp\Algorithm\Base;
 
 use Plista\Orp;
 use Plista\Orp\Algorithm;
@@ -37,7 +38,7 @@ abstract class PushStatistic extends Algorithm\Handle {
 
 
 	/**
-	 * @throws \Plista\Recommender\Algorithm\Exception
+	 * @throws \Plista\Orp\Algorithm\Exception
 	 */
 	public function validate() {
 		throw new Algorithm\Exception('StatsStream not supported');

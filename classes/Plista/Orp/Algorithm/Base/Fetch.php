@@ -1,5 +1,6 @@
 <?php
-namespace Plista\Orp\Sdk;
+//namespace Plista\Orp\Algorithm\Base;
+namespace Plista\Orp\Algorithm\Base;
 
 use Plista\Orp;
 use Plista\Orp\Algorithm;
@@ -24,12 +25,6 @@ abstract class Fetch extends Plista\Orp\Sdk\Handle {
 		// every request is valid per default
 		return true;
 	}
-
-	/**
-	 * The keys that make the recommendation unique.
-	 */
-	public abstract function getPersistenceSettings();
-
 
 	/**
 	 * @param int $limit

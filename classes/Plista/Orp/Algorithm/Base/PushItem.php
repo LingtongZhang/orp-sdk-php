@@ -1,6 +1,6 @@
 <?php
-namespace Plista\Orp\Sdk;
-
+//namespace Plista\Orp\Sdk;
+namespace Plista\Orp\Algorithm\Base;
 use Plista\Orp;
 use Plista\Orp\Algorithm;
 
@@ -59,6 +59,6 @@ abstract class PushItem {
 		$ItemUpdate = curl_init($this->getPostData());
 		curl_exec($ItemUpdate);
 			or throw new Exception('Could not response Proposal :( .');
-	*/
 	}
+	*/
 }
