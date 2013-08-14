@@ -25,7 +25,8 @@ class ExampleUniversityModel  {
 	}
 
 	public function write_LastItemId($item_id) {
-		// writing items in file
+		// writing the current item_id in file
+		// the file is supposed to contain only the last ID
 		$res = file_put_contents($this->path . 'LastItemId.txt',  $item_id,  LOCK_EX );
 
 		if (!$res) {
@@ -64,7 +65,7 @@ class ExampleUniversityModel  {
 	}
 
 	public function getItemId() {
-
+		// reading the last item ID from file
 		$item_id  = file_get_contents($this->path . 'LastItemId.txt');
 		if (!$item_id) {
 			die ('Error: Unable to write to request file :(');
@@ -77,8 +78,6 @@ class ExampleUniversityModel  {
 		$this->write_request($request);
 		// getting item_id
 		$item_id = $this->getItemId();
-
-
 		if (!$item_id) {
 			die ('Error: $item_id is not supposed to be null :(');
 		}
@@ -86,10 +85,8 @@ class ExampleUniversityModel  {
 		$result = $this->algorithm($request, $limit);
 
 		$fetchOnsiteHandler = new ExampleUniversityFetchOnsiteHandler();
-		$res = $fetchOnsiteHandler->fetchOnsite($item_id, $result);
-		if (!$res) {
-			die ('Error: unable to fetchOnsite with $item_id and $result :(');
-		}
+		$fetchOnsiteHandler->fetchOnsite($item_id, $result);
+
 	}
 
 	public function algorithm($request, $limit) {

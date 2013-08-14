@@ -31,7 +31,7 @@ class ExampleUniversityFetchOnsiteHandler /*extends \Plista\Orp\Algorithm\Base\F
 		// wrapping things up and getting ready to transmit
 		$recommendation_proposal = $this->getPostData($object);
 		//providing recommendation to plista
-		print $recommendation_proposal;
+		print_r ($recommendation_proposal);
 	}
 
 	public function toJSON($object) {
