@@ -16,7 +16,7 @@ class ExampleUniversityItemPushHandler implements Handle /*extends \Plista\Orp\A
 
 		$model = new ExampleUniversityModel();
 		// writing body informations to file
-		$model->write_item($item, $publisherid);
+		$model->write_item($item_id , $publisherid);
 		$model->write_publisherid($publisherid);
 
 	}

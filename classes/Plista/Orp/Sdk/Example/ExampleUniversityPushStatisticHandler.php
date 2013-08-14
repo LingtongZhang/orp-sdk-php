@@ -11,7 +11,16 @@ class ExampleUniversityPushStatisticHandler implements Handle /* extends \Plista
 
 		$model = new ExampleUniversityModel();
 		// writing body informations to file
-		$model->write_statistic($body);
+		$data[] = $body['context']['simple']['6'];
+		$data[] = $body['context']['simple']['19'];
+		/*
+		 *
+		 * if all data are supposed to get saved in file, change
+		 *  write_statistic($data);
+		 * 	to
+		 * write_statistic($body);
+		 */
+		$model->write_statistic($data);
 	}
 
 	public function validate($body) {

@@ -20,11 +20,11 @@ class ExampleUniversityModel  {
 		$this->publisherid = $publisherid;
 	}
 	*/
-	public function write_item($item, $publisherid) {
+	public function write_item($item_id , $publisherid) {
 
 		$today = date("m.d.y");
 		// writing items in file
-		$res = file_put_contents($this->path . $publisherid . '_items_'. $today . '.txt',  serialize($item) .  "\n", FILE_APPEND | LOCK_EX );
+		$res = file_put_contents($this->path . $publisherid . '_items_'. $today . '.txt',  $item_id .  "\n", FILE_APPEND | LOCK_EX );
 
 		if (!$res) {
 			die ('Error: Unable to write to item file :(');
@@ -62,6 +62,7 @@ class ExampleUniversityModel  {
 	}
 
 	public function write_request($request) {
+		/* optional - if all request should be save to a file
 		$today = date("m.d.y");
 		// writing requests in file
 		$res = file_put_contents($this->path . 'request_'. $today . '.txt',   serialize($request).  "\n", FILE_APPEND | LOCK_EX  );
@@ -69,7 +70,9 @@ class ExampleUniversityModel  {
 		if (!$res) {
 			die ('Error: Unable to write to request file :(');
 		}
+		*/
 	}
+
 
 	public function getPublisherId() {
 		// reading the last item ID from file
@@ -131,13 +134,12 @@ class ExampleUniversityModel  {
 			die ('Error: $item_id is not supposed to be null :(');
 		}
 		$file = file($this->path . $publisherid . '_items_'. $today . '.txt');
-
-		for ($c = count($file)-$limit; $c < count($file); $c++) {
+		$c = count($file)-$limit;
+		for (; $c < count($file); $c++) {
 			$object = $file[$c];
-			$object = unserialize($object);
-			print_r($object);
-			$item[] = $object['id'];
+			$item[] = rtrim($object);
 		}
+
 		return $item;
 	}
 }
