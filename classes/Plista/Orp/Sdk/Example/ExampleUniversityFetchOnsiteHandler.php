@@ -1,6 +1,6 @@
 <?php
 namespace Plista\Orp\Sdk\Example;
-class ExampleUniversityFetchOnsiteHandler extends \Plista\Orp\Algorithm\Base\FetchOnsite {
+class ExampleUniversityFetchOnsiteHandler /*extends \Plista\Orp\Algorithm\Base\FetchOnsite*/ {
 
 	const SCORE = 2;
 	const ITEM = 3;
@@ -19,19 +19,23 @@ class ExampleUniversityFetchOnsiteHandler extends \Plista\Orp\Algorithm\Base\Fet
 	private $data;
 
 	public function fetch($item_id, $result) {
-
+		// collecting item_id and result (recommandation)
 		$this->data['recs']['ints'][self::ITEM] = $item_id;
 		$this->data['recs']['floats'][self::SCORE] = $result;
 		return $this->data;
 	}
 
 	public function fetchOnsite($item_id, $result) {
+		// building structure of json response
 		$object = $this->fetch($item_id, $result);
+		// wrapping things up and getting ready to transmit
 		$recommendation_proposal = $this->getPostData($object);
-		return $recommendation_proposal;
+		//providing recommandation to plista
+		print $recommendation_proposal;
 	}
 
 	public function toJSON($object) {
+		// encoding recommandation
 		$json_string = json_encode($object);
 
 		if ($json_string === false) {
@@ -42,9 +46,18 @@ class ExampleUniversityFetchOnsiteHandler extends \Plista\Orp\Algorithm\Base\Fet
 	}
 
 	public function getPostData($object) {
+		// defining structure of the json string
 		return array(
 			'body' => $this->toJSON($object)
 		);
+	}
+
+	public function validate($data) {
+		if (empty($data)) {
+			throw new Exception('Error: request is empty');
+		} else {
+			return true;
+		}
 	}
 
 }

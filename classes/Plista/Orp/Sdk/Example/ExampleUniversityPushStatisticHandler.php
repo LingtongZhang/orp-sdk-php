@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 namespace Plista\Orp\Sdk\Example;
-class ExampleUniversityPushStatisticHandler extends \Plista\Orp\Algorithm\Base\PushStatistic {
+class ExampleUniversityPushStatisticHandler /* extends \Plista\Orp\Algorithm\Base\PushStatistic */ {
 
 	public function handle($body) {
 		/**
@@ -15,11 +15,15 @@ class ExampleUniversityPushStatisticHandler extends \Plista\Orp\Algorithm\Base\P
 		 */
 
 		$model = new ExampleUniversityModel();
+		// writing body informations to file
 		$model->write_statistic($body);
 	}
 
-	public function validate($seq) {
-		if (empty($data['notification_type'])) {
+	public function validate($body) {
+		// checking if body contains a notification type
+		// additionally one is able to differentiate between a click, impression, engagement and cpo
+		// for futher details may have a look at the controller gateway for notification types
+		if (empty($body['notification_type'])) {
 			throw new Exception('Error: empty notification type');
 		} else {
 			return true;

@@ -36,29 +36,30 @@ abstract class PushItem {
 		return true;
 	}
 
-	public abstract function push();
-
 	/*
-	public function toJSON() {
-		$json = json_encode($this->getItem());
+		public abstract function push();
 
-		if ($json === false) {
-			throw new Exception('Could not encode message to JSON :( .');
+		/*
+		public function toJSON() {
+			$json = json_encode($this->getItem());
+
+			if ($json === false) {
+				throw new Exception('Could not encode message to JSON :( .');
+			}
+
+			return $json;
 		}
 
-		return $json;
-	}
+		public function getPostData() {
+			return array(
+				'body' => $this->toJSON()
+			);
+		}
 
-	public function getPostData() {
-		return array(
-			'body' => $this->toJSON()
-		);
-	}
-
-	public function push() {  				 // ursp. public abstract function
-		$ItemUpdate = curl_init($this->getPostData());
-		curl_exec($ItemUpdate);
-			or throw new Exception('Could not response Proposal :( .');
-	}
-	*/
+		public function push() {  				 // ursp. public abstract function
+			$ItemUpdate = curl_init($this->getPostData());
+			curl_exec($ItemUpdate);
+				or throw new Exception('Could not response Proposal :( .');
+		}
+		*/
 }
