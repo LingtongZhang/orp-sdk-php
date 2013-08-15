@@ -24,14 +24,17 @@ $controller->setHandler('recommendation_request', $handleRequest);
 $controller->setHandler('event_notification', $handleNotify);
 $controller->setHandler('error_notification', $handleError);
 
+
+// checking if either body or type is empty
+if (empty($_POST['body']) || empty($_POST['type'])) {
+	die ('type or body emtpy');
+}
+
 // collecting type and body
 $type = $_POST['type'];
 $body = $_POST['body'];
 
-// checking if either body or type is empty
-if (empty($body) || empty($type)) {
-	die ('type or body emtpy');
-}
+
 // calling controller to handle incoming messages
 $controller->handle($type, $body);
 
