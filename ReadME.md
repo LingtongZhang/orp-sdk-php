@@ -53,7 +53,7 @@ for futher details you may want to have a look at http://wiki.ubuntuusers.de/Apa
 
 `sudo aptitiude install php5 libapache2-mod-php5`
 
-make sure php5 modules are enabled
+make sure php5 modules are enabled<br>
 `sudo a2enmod php5`
 
 for futher details you may want to have a look at http://php.net/manual/de/install.php
@@ -68,6 +68,8 @@ for futher details you may want to have a look at http://php.net/manual/de/insta
 
  cloning the git<br>
 `git clone git://github.com/plista/orp-sdk-php.git`
+
+for futher details you may want to have a look at http://githowto.com/
 
 **4. getting Sdk ready** <br>
 you may want to have a look at the example provided in `classes/Plista/Orp/Sdk/Example`
