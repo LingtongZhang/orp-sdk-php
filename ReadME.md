@@ -35,26 +35,16 @@ Install (in Ubuntu)
 **1. install webserver**
 
 
-`sudo aptitude install apache2`
-
-open config file<br>
-`sudo nano /etc/apache2/apache2.conf`
-
- add the following line somewhere<br>
-`ServerName localhost`
-
- restart the Apache Server<br>
-`sudo apache2ctl restart`
+`sudo apt-get install apache2`
 
 For further details you may want to have a look at http://wiki.ubuntuusers.de/Apache
 
 
 **2. enable PHP support**
 
-`sudo aptitiude install php5 libapache2-mod-php5`
+`sudo apt-get install php5 libapache2-mod-php5`
 
-make sure php5 modules are enabled<br>
-`sudo a2enmod php5`
+
 
 For further details you may want to have a look at http://php.net/manual/de/install.php
 
@@ -64,7 +54,7 @@ For further details you may want to have a look at http://php.net/manual/de/inst
 `sudo apt-get install git`
 
  make sure to be in the right place<br>
-`ch /var/www/yourSpecifiedDirectory`
+`ch /var/www/`
 
  cloning the git<br>
 `git clone git://github.com/plista/orp-sdk-php.git`
@@ -75,9 +65,28 @@ For further details you may want to have a look at http://githowto.com/
 Have a look at the example provided in `classes/Plista/Orp/Sdk/Example`
 
 **5. Sign up** <br>
-Sign up at http://orp.plista.com
+Sign up at http://orp.plista.com <br>
 
+Be sure to use the entire URL during the sign up process e.g.
+`http://servername.domain/classes/Plista/Orp/Sdk/Example/index.php`
+
+License
+-------
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 3 of
+the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 
 *powered by Plista GmbH (http://plista.com/)* .
+
+
