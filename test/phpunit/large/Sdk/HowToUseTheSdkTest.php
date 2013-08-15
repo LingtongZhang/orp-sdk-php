@@ -13,7 +13,7 @@ require_once __DIR__ . '/../../../bootstrap.php';
 /**
  *
  */
-class HowToUseTheSdkTest  /*extends phpunit*/ {
+class HowToUseTheSdkTest  /* extends phpunit */ {
 	//sample data
 
 	//event notification

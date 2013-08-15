@@ -12,14 +12,6 @@ class ExampleUniversityModel  {
 	// if you want to save the files in a specific directory, you may want to adapt $path
 	public $path = '';  // z.B. /home/user/plista/orp/
 
-	/**
-	 * @param int $publisherid
-	 */
-	/*
-	public function __construct($publisherid) {
-		$this->publisherid = $publisherid;
-	}
-	*/
 	public function write_item($item_id , $publisherid) {
 
 		$today = date("m.d.y");
@@ -101,17 +93,18 @@ class ExampleUniversityModel  {
 	}
 
 	/*
-	 * These algorithmen are generating random numbers for testing.
+	 * Here goes your algorithm.
 	 * You may want to have a look at current methodes like
 	 * http://en.wikipedia.org/wiki/Collaborative_filtering
 	 * http://en.wikipedia.org/wiki/Behavioral_targeting
 	 */
 	public function  algorithm_score($request, $limit) {
-		// creating numbers
+		// here goes your algorithm
 		$c = 0;
 		$score = array();
-
+		// getting decreasing score
 		while($c < $limit) {
+			// handling if $c==0 to avoid dividing with 0
 			if ($c==0) {
 				$v =1;
 			} else {
@@ -120,7 +113,6 @@ class ExampleUniversityModel  {
 			$score[] = $v;
 			$c++;
 		}
-
 		return $score;
 	}
 
@@ -135,11 +127,17 @@ class ExampleUniversityModel  {
 		}
 		$file = file($this->path . $publisherid . '_items_'. $today . '.txt');
 		$c = count($file)-$limit;
-		for (; $c < count($file); $c++) {
+		$tc = count($file);
+		// if the item file is empty or has less then $limit entries, PHP error will occur
+		if ($tc < $limit) {
+			throw new Exception ('Error: not enough entries in item file :(');
+		}
+		// getting the last $limit entries of file
+		for (; $c < $tc; $c++) {
 			$object = $file[$c];
+			// getting rid of "\n"
 			$item[] = rtrim($object);
 		}
-
 		return $item;
 	}
 }
