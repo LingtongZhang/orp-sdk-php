@@ -73,7 +73,7 @@ final class Controller {
 					// handling the body data regarding the type based specifications
 					$handler->handle($body);
 
-					// Gateway for notification types
+					// Gateway for notification types - optional
 					/*
 					// get notification type
 					$notitype = $body->getType()->getValue();

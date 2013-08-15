@@ -1,10 +1,13 @@
 <?php
+require_once(__DIR__.'/../../../../../config.php');
 
 use Plista\Orp\Sdk\Example;
 use Plista\Orp\Sdk\Example\ExampleUniversityItemPushHandler;
 use Plista\Orp\Sdk\Example\ExampleUniversityFetchOnsiteHandler;
 use Plista\Orp\Sdk\Example\ExampleUniversityPushErrorHandler;
 use Plista\Orp\Sdk\Example\ExampleUniversityPushStatisticHandler;
+
+
 
 // defining controller
 $controller = new \Plista\Orp\Sdk\Controller();
