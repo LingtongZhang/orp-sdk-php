@@ -33,7 +33,7 @@ class ExampleUniversityFetchOnsiteHandler  implements Handle /*extends \Plista\O
 		// wrapping things up and getting ready to transmit
 		$recommendation_proposal = $this->getPostData($object);
 		//providing recommendation to plista
-		print_r ($recommendation_proposal);
+		print ($recommendation_proposal);
 	}
 
 	public function toJSON($object) {
@@ -43,15 +43,12 @@ class ExampleUniversityFetchOnsiteHandler  implements Handle /*extends \Plista\O
 		if ($json_string === false) {
 			throw new Exception('Error: Could not encode response to JSON :( .');
 		}
-
 		return $json_string;
 	}
 
 	public function getPostData($object) {
-		// defining structure of the json string
-		return array(
-			'body' => $this->toJSON($object)
-		);
+		// returning json string
+		return $this->toJSON($object);
 	}
 
 	public function validate($data) {
