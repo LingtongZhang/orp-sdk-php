@@ -63,7 +63,7 @@ For further details you may want to have a look at http://php.net/manual/de/inst
  install git<br>
 `sudo apt-get install git`
 
- change directory to apache directory<br>
+ make sure to be in the right place<br>
 `ch /var/www/yourSpecifiedDirectory`
 
  cloning the git<br>
@@ -72,7 +72,7 @@ For further details you may want to have a look at http://php.net/manual/de/inst
 For further details you may want to have a look at http://githowto.com/
 
 **4. getting Sdk ready** <br>
-you may want to have a look at the example provided in `classes/Plista/Orp/Sdk/Example`
+Have a look at the example provided in `classes/Plista/Orp/Sdk/Example`
 
 **5. Sign up** <br>
 Sign up at http://orp.plista.com
@@ -80,4 +80,4 @@ Sign up at http://orp.plista.com
 
 
 
-Powered by Plista GmbH (http://plista.com/) .
+*powered by Plista GmbH (http://plista.com/)* .
