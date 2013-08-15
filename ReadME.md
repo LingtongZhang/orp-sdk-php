@@ -14,18 +14,18 @@ State of Development
 --------------------
 The ORP and this protocol are actively being developed, so expect major changes of the API over time. This document is also still in an incomplete state. We will regularly publish updates.
 
-For more informations about thr ORP project please have a look at the http://orp.plista.com/
+For more informations about the ORP project please have a look at the http://orp.plista.com/
 
 
 
 
 Requirements
 ------------
--  Webserver (f.e. Apache)
+-  webserver (e.g. Apache)
 -  PHP
 -  make sure your response time is less than 100ms
 
-If you consider to participate with a server from outside of germany, please get in touch with us:<br>
+If you consider to participate with a server from outside of Germany, please get in touch with us:<br>
 *contest (at) plista (dot) com* <br>
 This is necessary due to the response side of the server
 
@@ -46,7 +46,7 @@ open config file<br>
  restart the Apache Server<br>
 `sudo apache2ctl restart`
 
-for futher details you may want to have a look at http://wiki.ubuntuusers.de/Apache
+For further details you may want to have a look at http://wiki.ubuntuusers.de/Apache
 
 
 **2. enable PHP support**
@@ -56,7 +56,7 @@ for futher details you may want to have a look at http://wiki.ubuntuusers.de/Apa
 make sure php5 modules are enabled<br>
 `sudo a2enmod php5`
 
-for futher details you may want to have a look at http://php.net/manual/de/install.php
+For further details you may want to have a look at http://php.net/manual/de/install.php
 
 **3. getting Sdk from git**
 
@@ -69,7 +69,7 @@ for futher details you may want to have a look at http://php.net/manual/de/insta
  cloning the git<br>
 `git clone git://github.com/plista/orp-sdk-php.git`
 
-for futher details you may want to have a look at http://githowto.com/
+For further details you may want to have a look at http://githowto.com/
 
 **4. getting Sdk ready** <br>
 you may want to have a look at the example provided in `classes/Plista/Orp/Sdk/Example`
