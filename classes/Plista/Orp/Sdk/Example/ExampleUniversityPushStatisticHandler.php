@@ -1,13 +1,8 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: jannik
- * Date: 12.08.13
- * Time: 16:07
- * To change this template use File | Settings | File Templates.
- */
+namespace Plista\Orp\Sdk\Example;
+use Plista\Orp\Sdk\Handle;
 
-class ExampleUniversityPushStatisticHandler extends \Plista\Orp\Sdk\Algorithm\Base\PushStatistic {
+class ExampleUniversityPushStatisticHandler implements Handle /* extends \Plista\Orp\Algorithm\Base\PushStatistic */ {
 
 	public function handle($body) {
 		/**
@@ -15,12 +10,25 @@ class ExampleUniversityPushStatisticHandler extends \Plista\Orp\Sdk\Algorithm\Ba
 		 */
 
 		$model = new ExampleUniversityModel();
-		$model->write_statistic($body);
+		// writing body informations to file
+		$data[] = $body['context']['simple']['6'];
+		$data[] = $body['context']['simple']['19'];
+		/*
+		 *
+		 * if all data are supposed to get saved in file, change
+		 *  write_statistic($data);
+		 * 	to
+		 * write_statistic($body);
+		 */
+		$model->write_statistic($data);
 	}
 
-	public function validate($seq) {
-		if (empty($data['notification_type'])) {
-			throw new Exception('empty notification type');
+	public function validate($body) {
+		// checking if body contains a notification type
+		// additionally one is able to differentiate between a click, impression, engagement and cpo
+		// for futher details may have a look at the controller gateway for notification types
+		if (empty($body['notification_type'])) {
+			throw new Exception('Error: empty notification type');
 		} else {
 			return true;
 		}

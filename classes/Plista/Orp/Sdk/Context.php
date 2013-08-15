@@ -1,11 +1,14 @@
 <?php
 namespace Plista\Orp\Sdk;
 
+/*
+ * This class contains the input vectors and the function to access the informations from the json_string
+ */
 
 class Context {
 
 	/**
-	 * input vectors, what we can NOT influence
+	 * input vectors
 	 */
 	const GENDER = 1;
 	const AGE = 2;
@@ -14,7 +17,7 @@ class Context {
 	const ISP = 5;
 	const OS = 6;
 	const GEO_USER = 7;
-	const PUBLISHER_FILTER = 8; // better name: SITELIST
+	const PUBLISHER_FILTER = 8;
 	const TIME_WEEKDAY = 9;
 	const CHANNEL = 10;
 	const CATEGORY = 11;
@@ -56,7 +59,7 @@ class Context {
 	const DEVICE_TYPE = 47;
 	const GEO_TYPE = 48;
 	const TIME_MINUTE_30 = 49;
-	const CPO = 50; // better name: FILTER_CPO
+	const CPO = 50;
 	const ITEM_AGE = 51;
 	const FILTER_ALLOWOSR = 52;
 	const URL = 53;
@@ -73,6 +76,7 @@ class Context {
 	public function __construct(array $data) {
 		$this->data = $data;
 	}
+
 
 	/**
 	 * @return array
@@ -256,9 +260,7 @@ class Context {
 		return $this->data['simple'][self::GEO_USER_RADIUS];
 	}
 
-	/**
-	 * Todo: getEnsemble is not specified in orp-api-03.pdf
-	 */
+
 	public function getEnsemble() {
 		return $this->data[self::ENSEMBLE];
 	}

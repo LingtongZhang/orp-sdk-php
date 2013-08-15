@@ -1,9 +1,6 @@
 <?php
-//namespace Plista\Orp\Sdk;
 namespace Plista\Orp\Algorithm\Base;
 /**
- * fetchs the onsite recommendations
- * caching should be done somewhere else
  * @package Plista\Orp\Algorithm\Base
  */
 abstract class FetchOnsite {
@@ -21,9 +18,14 @@ abstract class FetchOnsite {
 
 	}
 
-	public function validate() {
+
+	public function handle($request) {
 
 	}
 
+
+	public function validate($data) {
+
+	}
 
 }
