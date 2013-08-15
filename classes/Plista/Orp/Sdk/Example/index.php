@@ -26,8 +26,11 @@ $controller->setHandler('error_notification', $handleError);
 
 
 // checking if either body or type is empty
-if (empty($_POST['body']) || empty($_POST['type'])) {
-	die ('type or body emtpy');
+if (empty($_POST['body'])) {
+	die ('Warning: body is empty :(');
+}
+if (empty($_POST['type'])) {
+	die ('Warning: type is empty :(');
 }
 
 // collecting type and body
