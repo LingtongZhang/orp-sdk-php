@@ -37,13 +37,13 @@ Install (in Ubuntu)
 
 `sudo aptitude install apache2`
 
-open config file
+open config file<br>
 `sudo nano /etc/apache2/apache2.conf`
 
- add the following line somewhere
+ add the following line somewhere<br>
 `ServerName localhost`
 
- restart the Apache Server
+ restart the Apache Server<br>
 `sudo apache2ctl restart`
 
 for futher details you may want to have a look at http://wiki.ubuntuusers.de/Apache
@@ -60,13 +60,13 @@ for futher details you may want to have a look at http://php.net/manual/de/insta
 
 **3. getting Sdk from git**
 
- install git
+ install git<br>
 `sudo apt-get install git`
 
- change directory to apache directory
+ change directory to apache directory<br>
 `ch /var/www/yourSpecifiedDirectory`
 
- cloning the git
+ cloning the git<br>
 `git clone git://github.com/plista/orp-sdk-php.git`
 
 **4. getting Sdk ready** <br>
