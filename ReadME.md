@@ -25,52 +25,52 @@ Requirements
 -  PHP
 -  make sure your response time is less than 100ms
 
-If you consider to participate with a server from outside of germany, please get in touch with us:
-*contest (at) plista (dot) com* .
+If you consider to participate with a server from outside of germany, please get in touch with us:<br>
+*contest (at) plista (dot) com* <br>
 This is necessary due to the response side of the server
 
 Install (in Ubuntu)
 -------------------
 
-**1. install webserver **
+**1. install webserver**
 
 
-*sudo aptitude install apache2*
+`sudo aptitude install apache2`
 
 open config file
-*sudo nano /etc/apache2/apache2.conf*
+`sudo nano /etc/apache2/apache2.conf`
 
  add the following line somewhere
-*ServerName localhost*
+`ServerName localhost`
 
  restart the Apache Server
-sudo apache2ctl restart
+`sudo apache2ctl restart`
 
 for futher details you may want to have a look at http://wiki.ubuntuusers.de/Apache
 
 
-**2. enable PHP support **
+**2. enable PHP support**
 
 `sudo aptitiude install php5 libapache2-mod-php5`
 
-//make sure php5 modules are enabled
-*sudo a2enmod php5*
+make sure php5 modules are enabled
+`sudo a2enmod php5`
 
-//for futher details you may want to have a look at http://php.net/manual/de/install.php
+for futher details you may want to have a look at http://php.net/manual/de/install.php
 
-**3. getting Sdk from git **
+**3. getting Sdk from git**
 
-// install git
-*sudo apt-get install git*
+ install git
+`sudo apt-get install git`
 
-// change directory to apache directory
-*ch /var/www/yourSpecifiedDirectory
+ change directory to apache directory
+`ch /var/www/yourSpecifiedDirectory`
 
-// cloning the git
-*git clone git://github.com/plista/orp-sdk-php.git*
+ cloning the git
+`git clone git://github.com/plista/orp-sdk-php.git`
 
-**4. getting Sdk ready ** <br>
-you may want to have a look at the example provided in classes/Plista/Orp/Sdk/Example
+**4. getting Sdk ready** <br>
+you may want to have a look at the example provided in `classes/Plista/Orp/Sdk/Example`
 
 **5. Sign up** <br>
 Sign up at http://orp.plista.com
