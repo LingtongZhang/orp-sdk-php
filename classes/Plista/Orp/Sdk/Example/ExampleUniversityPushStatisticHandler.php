@@ -1,5 +1,6 @@
 <?php
 namespace Plista\Orp\Sdk\Example;
+use Plista\Orp\Sdk\Exception;
 use Plista\Orp\Sdk\Handle;
 
 class ExampleUniversityPushStatisticHandler implements Handle {
@@ -31,7 +32,9 @@ class ExampleUniversityPushStatisticHandler implements Handle {
 			throw new Exception('Error: empty notification type');
 		}
 
-		// TODO: make sure context and the required attributes are present
+		if (empty($body['context'])) {
+			throw new Exception('Error: there is no valid context provides in the body.');
+		}
 
 		return true;
 	}

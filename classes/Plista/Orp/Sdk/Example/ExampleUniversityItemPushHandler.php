@@ -14,7 +14,6 @@ class ExampleUniversityItemPushHandler implements Handle {
 		$model = new ExampleUniversityModel();
 		// writing body informations to file
 		$model->write_item($item_id , $publisherid);
-		$model->write_publisherid($publisherid);
 	}
 
 	public function validate($item) {
@@ -22,7 +21,13 @@ class ExampleUniversityItemPushHandler implements Handle {
 			throw new Exception('Error: item is empty');
 		}
 
-		// TODO: make sure id and domainid are set
+		if (empty($item['id'])) {
+			throw new Exception('Error: Item ID is empty');
+		}
+
+		if (empty($item['domainid'])) {
+			throw new Exception('Error: Domain ID is empty');
+		}
 
 		return true;
 	}

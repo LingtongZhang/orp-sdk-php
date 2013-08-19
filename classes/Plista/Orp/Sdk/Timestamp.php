@@ -6,7 +6,12 @@ class Timestamp {
 	private $data = array();
 
 	public function __construct($data) {
-		// TODO: add a validation here
+
+		if (empty($data)) {
+			throw new Exception('Error: provided data array is empty');
+		}
+
+
 		$this->data = $data;
 	}
 

@@ -18,19 +18,8 @@ class ExampleUniversityModel {
 		$today = date("m.d.y");
 		// writing items in file
 		$res = file_put_contents($this->path . $publisherid . '_items_' . $today . '.txt', $item_id . "\n", FILE_APPEND | LOCK_EX);
-
 		if (!$res) {
 			throw new Exception('Error: Unable to write to item file :(');
-		}
-	}
-
-	public function write_publisherId($publisherid) {
-		// writing the current item_id in file
-		// the file is supposed to contain only the last ID
-		$res = file_put_contents($this->path . 'publisherID.txt', $publisherid, LOCK_EX);
-
-		if (!$res) {
-			throw new Exception('Error: Unable to write to publisherID file :(');
 		}
 	}
 
@@ -65,15 +54,6 @@ class ExampleUniversityModel {
 		}
 	}
 
-	public function getPublisherId() {
-		// reading the last item ID from file
-		$publisherid = file_get_contents($this->path . 'publisherID.txt');
-		if (!$publisherid) {
-			throw new Exception('Error: Unable to write to request file :(');
-		}
-		return $publisherid;
-	}
-
 	/**
 	 * @param $request
 	 * @param $limit
@@ -84,8 +64,10 @@ class ExampleUniversityModel {
 		// record the request in file
 		//$this->write_request($request); // uncomment this line to have all requests logged to file
 
+		$publisherID = $request['context']['simple']['27'];
+
 		// using algorithm in order to generate a recommendation
-		$item = $this->algorithm_item($request, $limit);
+		$item = $this->algorithm_item($publisherID, $request, $limit);
 		$score = $this->algorithm_score($request, $limit);
 
 		return array(
@@ -127,19 +109,20 @@ class ExampleUniversityModel {
 	 * @return array
 	 * @throws Exception
 	 */
-	public function algorithm_item($request, $limit) {
+	public function algorithm_item($publisherID, $request, $limit) {
 		// here goes your algorithm
 
 		$item = array();
 		$today = date("m.d.y");
-		// TODO: get publisher id from context, not from file
-		$publisherid = $this->getPublisherId();
 
-		if (!$publisherid) {
+		if (!$publisherID) {
 			throw new Exception('Error: $item_id is not supposed to be null :(');
 		}
 
-		$file = file($this->path . $publisherid . '_items_' . $today . '.txt');
+		$file = file($this->path . $publisherID . '_items_' . $today . '.txt');
+		if (!$file) {
+			throw new Exception('Error: Unable to read item file. Probably no information about the publisher ' . $publisherID . ' available  :(');
+		}
 		$c = count($file) - $limit;
 		$tc = count($file);
 

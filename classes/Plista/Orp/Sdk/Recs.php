@@ -10,7 +10,15 @@ class Recs {
 	private $data = array();
 
 	public function __construct($data) {
-		// TODO: add a validation here, we have to have items and maybe scores
+
+		if (empty($data['result'])) {
+			throw new Exception('Error: there is no result available in the data array');
+		}
+
+		if (empty($data['score'])) {
+			throw new Exception('Error: there is no score available in the data array');
+		}
+
 		$this->data['recs']['ints'][self::ITEM] = $data['result'];
 		$this->data['recs']['floats'][self::SCORE] = $data['score'];
 	}
