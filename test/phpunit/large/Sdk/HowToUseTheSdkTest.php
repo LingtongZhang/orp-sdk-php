@@ -48,8 +48,9 @@ class HowToUseTheSdkTest extends \PHPUnit_Framework_TestCase {
 		$controller->handle($this->type_item, $this->body_item); // is working -> writing item to  file
 		$controller->handle($this->type_error, $this->body_error); // is working -> writing error to log file
 		$controller->handle($this->type_notify, $this->body_notify); // is working -> writing notify to file
-		$controller->handle($this->type_request, $this->body_request); //is working -> writing request to file and prints {"recs":{"ints":{"3":null},"floats":{"2":2}}} as answer
+		$result = $controller->handle($this->type_request, $this->body_request); //is working -> writing request to file and prints {"recs":{"ints":{"3":null},"floats":{"2":2}}} as answer
 
+		// TODO: do some checks on the $result
 		// TODO: look at the generated files using $this->assertFileContents() or similar
 		// TODO: then make sure all generated files are deleted again
 	}
