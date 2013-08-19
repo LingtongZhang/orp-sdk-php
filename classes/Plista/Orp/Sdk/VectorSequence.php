@@ -2,6 +2,8 @@
 namespace Plista\Orp\Sdk;
 
 
+use Plista\Orp\Sdk\Example\Exception;
+
 class VectorSequence {
 
 	/**
@@ -15,23 +17,36 @@ class VectorSequence {
 	/**
 	 * @var array
 	 */
-	public $recs  = array();
+	public $recs = array();
 	/**
 	 * @var string
 	 */
 	public $timestamp;
 
-
-	public function __construct() {
-	}
-
 	/**
 	 * @param string $str
+	 * @throws Exception when an error occurred during json processing
 	 * @return \Plista\Orp\Sdk\VectorSequence
 	 */
 	public static function fromJson($str) {
 
-		$data = json_decode($str, true);
+		$data = @json_decode($str, true);
+
+		if ($data === false) {
+			throw new Exception('Could not decode JSON: ' . json_last_error());
+		}
+
+		if (empty($data['type'])) {
+			throw new Exception('type missing in JSON');
+		}
+
+		if (empty($data['context'])) {
+			throw new Exception('context missing in JSON');
+		}
+
+		if (empty($data['timestamp'])) {
+			throw new Exception('timestamp missing in JSON');
+		}
 
 		$instance = new self();
 		$instance->setType($data['type']);
@@ -54,7 +69,6 @@ class VectorSequence {
 	 */
 	public function setContext($context) {
 		$this->context = $context;
-
 	}
 
 	/**
@@ -62,7 +76,6 @@ class VectorSequence {
 	 */
 	public function setRecs($recs) {
 		$this->recs = $recs;
-
 	}
 
 	/**
@@ -78,6 +91,7 @@ class VectorSequence {
 	public function getType() {
 		return new Type($this->type);
 	}
+
 	/**
 	 * @return Context
 	 */
@@ -98,5 +112,4 @@ class VectorSequence {
 	public function getTimestamp() {
 		return new Timestamp($this->timestamp);
 	}
-
 }
