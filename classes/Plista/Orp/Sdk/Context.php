@@ -41,7 +41,6 @@ class Context {
 	const SSP = 29;
 	const PIXEL_3RD_PARTY = 30;
 	const GEO_USER_RADIUS = 31;
-	const ENSEMBLE = 32;
 	const KEYWORD = 33;
 	const REDUCED_BID = 34;
 	const ADBLOCKER = 35;
@@ -77,29 +76,31 @@ class Context {
 		$this->data = $data;
 	}
 
-
 	/**
 	 * @return array
 	 */
 	public function getGender() {
 		return $this->data['clusters'][self::GENDER];
 	}
+
 	/**
 	 * @return array
 	 */
 	public function getAge() {
 		return $this->data['clusters'][self::AGE];
 	}
+
 	/**
 	 * @return array
 	 */
 	public function getIncome() {
 		return $this->data['clusters'][self::INCOME];
 	}
+
 	/**
 	 * @return int
 	 */
-	public function getBrowser() {				//4
+	public function getBrowser() { //4
 		return $this->data['simple'][self::BROWSER];
 	}
 
@@ -109,12 +110,14 @@ class Context {
 	public function getIsp() {
 		return $this->data['simple'][self::ISP];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getOs() {
 		return $this->data['simple'][self::OS];
 	}
+
 	/**
 	 * @return int
 	 */
@@ -122,9 +125,10 @@ class Context {
 		return $this->data['simple'][self::GEO_USER];
 	}
 
-	public function getPublisher_filter() {			// 8
+	public function getPublisher_filter() { // 8
 		return $this->data['lists'][self::PUBLISHER_FILTER];
 	}
+
 	/**
 	 * @return int
 	 */
@@ -139,120 +143,140 @@ class Context {
 	public function getCategory() {
 		return $this->data['lists'][self::CATEGORY];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getPosition() {
 		return $this->data['simple'][self::POSITION];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getDo_not_track() {
 		return $this->data['simple'][self::DO_NOT_TRACK];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getWidget_kind() {
 		return $this->data['simple'][self::WIDGET_KIND];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getWeather() {
 		return $this->data['simple'][self::WEATHER];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getGeo_publisher() {
 		return $this->data['simple'][self::GEO_PUBLISHER];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getLang_user() {
 		return $this->data['simple'][self::LANG_USER];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getPosition_in_widget() {
 		return $this->data['simple'][self::POSITION_IN_WIDGET];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getSubid() {
 		return $this->data['simple'][self::SUBID];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getTime_to_action() {
 		return $this->data['simple'][self::TIME_TO_ACTION];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getWidget_page() {
 		return $this->data['simple'][self::WIDGET_PAGE];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getGeo_user_zip() {
 		return $this->data['simple'][self::GEO_USER_ZIP];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getTime_hour() {
 		return $this->data['simple'][self::TIME_HOUR];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getUser_publisher_impression() {
 		return $this->data['simple'][self::USER_PUBLISHER_IMPRESSIONS];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getItem_source() {
 		return $this->data['simple'][self::ITEM_SOURCE];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getRetargeting() {
 		return $this->data['simple'][self::RETARGETING];
 	}
+
 	/**
 	 * @return int
 	 */
-	public function getPublisher() {					//27
+	public function getPublisher() { //27
 		return $this->data['simple'][self::PUBLISHER];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getUser_campaign_impression() {
 		return $this->data['simple'][self::USER_CAMPAIGN_IMPRESSIONS];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getSsp() {
 		return $this->data['simple'][self::SSP];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getPixel_3rd_pard() {
 		return $this->data['simple'][self::PIXEL_3RD_PARTY];
 	}
+
 	/**
 	 * @return int
 	 */
@@ -260,154 +284,174 @@ class Context {
 		return $this->data['simple'][self::GEO_USER_RADIUS];
 	}
 
-
-	public function getEnsemble() {
-		return $this->data[self::ENSEMBLE];
-	}
 	/**
 	 * @return array
 	 */
-	public function getKeyword() {					// 33
+	public function getKeyword() { // 33
 		return $this->data['clusters'][self::KEYWORD];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getReduced_bid() {
 		return $this->data['simple'][self::REDUCED_BID];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getAdblocker() {
 		return $this->data['simple'][self::ADBLOCKER];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getBid_cpm() {
 		return $this->data['simple'][self::BID_CPM];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getRelease() {
 		return $this->data['simple'][self::RELEASE];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getPresentday() {
 		return $this->data['simple'][self::PRESENTDAY];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getWidget_id() {
 		return $this->data['simple'][self::WIDGET_ID];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getDimension_screen() {
 		return $this->data['simple'][self::DIMENSION_SCREEN];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getContest_team() {
 		return $this->data['simple'][self::CONTEST_TEAM];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getItem_status() {
 		return $this->data['simple'][self::ITEM_STATUS];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getPixel_4th_party() {
 		return $this->data['simple'][self::PIXEL_4TH_PARTY];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getPublisher_referer() {
 		return $this->data['simple'][self::PUBLISHER_REFERER];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getSsp_publisherid() {
 		return $this->data['simple'][self::SSP_PUBLISHERID];
 	}
+
 	/**
 	 * @return array
 	 */
 	public function getCategory_sem() {
 		return $this->data['clusters'][self::CATEGORY_SEM];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getDevice_type() {
 		return $this->data['simple'][self::DEVICE_TYPE];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getGeo_type() {
 		return $this->data['simple'][self::GEO_TYPE];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getTime_minute_30() {
 		return $this->data['simple'][self::TIME_MINUTE_30];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getCpo() {
 		return $this->data['simple'][self::CPO];
 	}
+
 	/**
 	 * @return array
 	 */
 	public function getItem_age() {
 		return $this->data['clusters'][self::ITEM_AGE];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getFilter_allowosr() {
 		return $this->data['simple'][self::FILTER_ALLOWOSR];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getUrl() {
 		return $this->data['simple'][self::URL];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getSsp_qualifier() {
 		return $this->data['simple'][self::SSP_QUALIFIER];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getSsp_network() {
 		return $this->data['simple'][self::SSP_NETWORK];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function getBrowser_3rd_party_support() {
 		return $this->data['simple'][self::BROWSER_3RD_PARTY_SUPPORT];
 	}
+
 	/**
 	 * @return int
 	 */
@@ -418,12 +462,11 @@ class Context {
 	public function getChannel_sem() {
 		return $this->data['lists'][self::CHANNEL_SEM];
 	}
+
 	/**
 	 * @return int
 	 */
 	public function gettransport_protocol() {
 		return $this->data['simple'][self::TRANSPORT_PROTOCOL];
 	}
-
-
 }
