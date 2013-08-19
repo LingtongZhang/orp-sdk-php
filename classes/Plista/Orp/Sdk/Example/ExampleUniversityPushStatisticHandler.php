@@ -2,17 +2,17 @@
 namespace Plista\Orp\Sdk\Example;
 use Plista\Orp\Sdk\Handle;
 
-class ExampleUniversityPushStatisticHandler implements Handle /* extends \Plista\Orp\Algorithm\Base\PushStatistic */ {
+class ExampleUniversityPushStatisticHandler implements Handle {
 
 	public function handle($body) {
 		/**
 		 * @var ExampleUniversityModel $model
 		 */
-
 		$model = new ExampleUniversityModel();
 		// writing body informations to file
 		$data[] = $body['context']['simple']['6'];
 		$data[] = $body['context']['simple']['19'];
+
 		/*
 		 *
 		 * if all data are supposed to get saved in file, change
@@ -29,8 +29,10 @@ class ExampleUniversityPushStatisticHandler implements Handle /* extends \Plista
 		// for futher details may have a look at the controller gateway for notification types
 		if (empty($body['notification_type'])) {
 			throw new Exception('Error: empty notification type');
-		} else {
-			return true;
 		}
+
+		// TODO: make sure context and the required attributes are present
+
+		return true;
 	}
 }

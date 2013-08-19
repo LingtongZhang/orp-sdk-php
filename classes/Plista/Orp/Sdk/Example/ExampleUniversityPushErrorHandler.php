@@ -8,7 +8,6 @@ class ExampleUniversityPushErrorHandler implements Handle  {
 		/**
 		 * @var ExampleUniversityModel $model
 		 */
-
 		$model = new ExampleUniversityModel();
 		// writing body informations to file
 		$model->write_error($error);
@@ -17,8 +16,8 @@ class ExampleUniversityPushErrorHandler implements Handle  {
 	public function validate($error) {
 		if (empty($error)) {
 			throw new Exception('Error: error_message is empty');
-		} else {
-			return true;
 		}
+
+		return true;
 	}
 }
