@@ -1,7 +1,6 @@
 <?php
 namespace Plista\Orp\Sdk;
 
-
 class Type {
 
 	/**
@@ -10,6 +9,7 @@ class Type {
 	private $data;
 
 	public function __construct($data) {
+		// TODO: add a validation here
 		$this->data = $data;
 	}
 

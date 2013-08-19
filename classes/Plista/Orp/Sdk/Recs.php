@@ -1,14 +1,6 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: jannik
- * Date: 05.08.13
- * Time: 13:34
- * To change this template use File | Settings | File Templates.
- */
 
 namespace Plista\Orp\Sdk;
-
 
 class Recs {
 
@@ -18,6 +10,7 @@ class Recs {
 	private $data = array();
 
 	public function __construct($data) {
+		// TODO: add a validation here
 		$this->data = $data;
 	}
 
