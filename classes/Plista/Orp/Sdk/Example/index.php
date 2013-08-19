@@ -10,7 +10,7 @@ use Plista\Orp\Sdk\Example\ExampleUniversityPushStatisticHandler;
 // defining controller
 $controller = new \Plista\Orp\Sdk\Controller();
 
-//defining the handle
+//defining the handles
 $handleItem = new ExampleUniversityItemPushHandler();
 $handleRequest = new ExampleUniversityFetchOnsiteHandler();
 $handleError = new ExampleUniversityPushErrorHandler();
@@ -26,6 +26,7 @@ $controller->setHandler('error_notification', $handleError);
 if (empty($_POST['body'])) {
 	die ('Warning: body is empty :(');
 }
+
 if (empty($_POST['type'])) {
 	die ('Warning: type is empty :(');
 }
@@ -35,6 +36,9 @@ $type = $_POST['type'];
 $body = $_POST['body'];
 
 // calling controller to handle incoming messages
-$controller->handle($type, $body);
+$result = $controller->handle($type, $body);
 
-
+// if the request was a recommendation request and we got results, print them out
+if ($result instanceof \Plista\Orp\Sdk\Recs) {
+	echo $result->toJSON();
+}
