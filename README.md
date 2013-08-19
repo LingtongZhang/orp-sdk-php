@@ -27,7 +27,7 @@ Requirements
 
 If you consider to participate with a server from outside of Germany, please get in touch with us:<br>
 *contest (at) plista (dot) com* <br>
-This is necessary due to the response side of the server
+This is necessary due to the response time of the server
 
 Install (in Ubuntu)
 -------------------
@@ -46,7 +46,7 @@ For further details you may want to have a look at http://wiki.ubuntuusers.de/Ap
 
 
 
-For further details you may want to have a look at http://php.net/manual/de/install.php
+For further details you may want to have a look at http://php.net/manual/en/install.php
 
 **3. getting Sdk from git**
 
@@ -68,7 +68,7 @@ Have a look at the example provided in `classes/Plista/Orp/Sdk/Example`
 Sign up at http://orp.plista.com <br>
 
 Be sure to use the entire URL during the sign up process e.g.
-`http://servername.domain/classes/Plista/Orp/Sdk/Example/index.php`
+`http://servername.domain/index-sdk-example.php`
 
 License
 -------
