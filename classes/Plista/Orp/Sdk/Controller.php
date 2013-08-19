@@ -61,7 +61,7 @@ final class Controller {
 		// validate the body data regarding the type based specifications
 		$handler->validate($body);
 		// handling the body data regarding the type based specifications
-		$handler->handle($body);
+		return $handler->handle($body);
 
 		// Gateway for notification types - optional
 		/*
