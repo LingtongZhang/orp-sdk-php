@@ -18,6 +18,7 @@ class ExampleUniversityFetchOnsiteHandler implements Handle {
 		$result = $model->fetch($request, $limit);
 
 		$recs = new Recs($result);
+		// $model->write_recs($recs); // uncomment this line to have all recs logged to file
 		return $recs;
 	}
 

@@ -54,6 +54,17 @@ class ExampleUniversityModel {
 		}
 	}
 
+	public function write_recs($recs) {
+		// if all request should be save to a file
+		$today = date("m.d.y");
+		// writing requests in file
+		$res = file_put_contents($this->path . 'recs_' . $today . '.txt', serialize($recs) . "\n", FILE_APPEND | LOCK_EX);
+
+		if (!$res) {
+			throw new Exception('Error: Unable to write to recs file :(');
+		}
+	}
+
 	/**
 	 * @param $request
 	 * @param $limit
