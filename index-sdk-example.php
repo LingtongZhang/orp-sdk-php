@@ -6,6 +6,10 @@ use Plista\Orp\Sdk\Example\ExampleUniversityItemPushHandler;
 use Plista\Orp\Sdk\Example\ExampleUniversityFetchOnsiteHandler;
 use Plista\Orp\Sdk\Example\ExampleUniversityPushErrorHandler;
 use Plista\Orp\Sdk\Example\ExampleUniversityPushStatisticHandler;
+use Plista\Orp\Sdk\Example\ExampleUniversityModel;
+
+// define path
+ExampleUniversityModel::setPath(__DIR__ . '/logs/');
 
 // defining controller
 $controller = new \Plista\Orp\Sdk\Controller();
@@ -24,11 +28,11 @@ $controller->setHandler('error_notification', $handleError);
 
 // checking if either body or type is empty
 if (empty($_POST['body'])) {
-	die ('Warning: body is empty :(');
+	throw new \Exception ('Warning: body is empty :(');
 }
 
 if (empty($_POST['type'])) {
-	die ('Warning: type is empty :(');
+	throw new \Exception ('Warning: type is empty :(');
 }
 
 // collecting type and body

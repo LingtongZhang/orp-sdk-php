@@ -28,12 +28,12 @@ class ExampleUniversityPushStatisticHandler implements Handle {
 		// checking if body contains a notification type
 		// additionally one is able to differentiate between a click, impression, engagement and cpo
 		// for futher details may have a look at the controller gateway for notification types
-		if (empty($body['notification_type'])) {
-			throw new Exception('Error: empty notification type');
+		if (empty($body['type'])) {
+			throw new ValidationException('Error: empty notification type');
 		}
 
 		if (empty($body['context'])) {
-			throw new Exception('Error: there is no valid context provides in the body.');
+			throw new ValidationException('Error: there is no valid context provides in the body.');
 		}
 
 		return true;

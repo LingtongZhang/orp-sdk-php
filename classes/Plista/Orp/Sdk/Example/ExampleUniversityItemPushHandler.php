@@ -18,15 +18,15 @@ class ExampleUniversityItemPushHandler implements Handle {
 
 	public function validate($item) {
 		if (empty($item)) {
-			throw new Exception('Error: item is empty');
+			throw new ValidationException('Error: item is empty');
 		}
 
 		if (empty($item['id'])) {
-			throw new Exception('Error: Item ID is empty');
+			throw new ValidationException('Error: Item ID is empty');
 		}
 
 		if (empty($item['domainid'])) {
-			throw new Exception('Error: Domain ID is empty');
+			throw new ValidationException('Error: Domain ID is empty');
 		}
 
 		return true;

@@ -10,14 +10,24 @@ class ExampleUniversityModel {
 
 	const ITEM = 3;
 
-	// if you want to save the files in a specific directory, you may want to adapt $path
-	public $path = ''; // e.g. /home/user/plista/orp/
+	/**
+	 * if you want to save the files in a specific directory, set it from index.php
+	 * @var string
+	 */
+	private static $path = '';
+
+	/**
+	 * @param string $path
+	 */
+	public static function setPath($path) {
+		self::$path = $path;
+	}
 
 	public function write_item($item_id, $publisherid) {
 
 		$today = date("m.d.y");
 		// writing items in file
-		$res = file_put_contents($this->path . $publisherid . '_items_' . $today . '.txt', $item_id . "\n", FILE_APPEND | LOCK_EX);
+		$res = file_put_contents(self::$path . $publisherid . '_items_' . $today . '.txt', $item_id . "\n", FILE_APPEND | LOCK_EX);
 		if (!$res) {
 			throw new Exception('Error: Unable to write to item file :(');
 		}
@@ -27,7 +37,7 @@ class ExampleUniversityModel {
 
 		$today = date("m.d.y");
 		// writing statistics in file
-		$res = file_put_contents($this->path . 'statistic_' . $today . '.txt', serialize($seq) . "\n", FILE_APPEND | LOCK_EX);
+		$res = file_put_contents(self::$path . 'statistic_' . $today . '.txt', serialize($seq) . "\n", FILE_APPEND | LOCK_EX);
 
 		if (!$res) {
 			throw new Exception('Error: Unable to write to statistic file :(');
@@ -37,7 +47,7 @@ class ExampleUniversityModel {
 	public function write_error($error) {
 		$today = date("m.d.y");
 		// writing errors in log file
-		$res = file_put_contents($this->path . 'error_' . $today . '.txt', serialize($error) . "\n", FILE_APPEND | LOCK_EX);
+		$res = file_put_contents(self::$path . 'error_' . $today . '.txt', serialize($error) . "\n", FILE_APPEND | LOCK_EX);
 		if (!$res) {
 			throw new Exception('Error: Unable to write to error file :(');
 		}
@@ -47,7 +57,7 @@ class ExampleUniversityModel {
 		// if all request should be save to a file
 		$today = date("m.d.y");
 		// writing requests in file
-		$res = file_put_contents($this->path . 'request_' . $today . '.txt', serialize($request) . "\n", FILE_APPEND | LOCK_EX);
+		$res = file_put_contents(self::$path . 'request_' . $today . '.txt', serialize($request) . "\n", FILE_APPEND | LOCK_EX);
 
 		if (!$res) {
 			throw new Exception('Error: Unable to write to request file :(');
@@ -58,7 +68,7 @@ class ExampleUniversityModel {
 		// if all request should be save to a file
 		$today = date("m.d.y");
 		// writing requests in file
-		$res = file_put_contents($this->path . 'recs_' . $today . '.txt', serialize($recs) . "\n", FILE_APPEND | LOCK_EX);
+		$res = file_put_contents(self::$path . 'recs_' . $today . '.txt', serialize($recs) . "\n", FILE_APPEND | LOCK_EX);
 
 		if (!$res) {
 			throw new Exception('Error: Unable to write to recs file :(');
@@ -130,9 +140,11 @@ class ExampleUniversityModel {
 			throw new Exception('Error: $item_id is not supposed to be null :(');
 		}
 
-		$file = file($this->path . $publisherID . '_items_' . $today . '.txt');
+		// suppress warnings if read file does not exist
+		$file = @file(self::$path . $publisherID . '_items_' . $today . '.txt');
 		if (!$file) {
-			throw new Exception('Error: Unable to read item file. Probably no information about the publisher ' . $publisherID . ' available  :(');
+			return array();
+			// TODO: exception? throw new Exception('Error: Unable to read item file. Probably no information about the publisher ' . $publisherID . ' available  :(');
 		}
 		$c = count($file) - $limit;
 		$tc = count($file);

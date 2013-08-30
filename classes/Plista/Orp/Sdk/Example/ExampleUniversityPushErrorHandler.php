@@ -15,7 +15,7 @@ class ExampleUniversityPushErrorHandler implements Handle  {
 
 	public function validate($error) {
 		if (empty($error)) {
-			throw new Exception('Error: error_message is empty');
+			throw new ValidationException('Error: error_message is empty');
 		}
 
 		return true;
