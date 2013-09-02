@@ -67,6 +67,7 @@ Have a look at the example provided in `classes/Plista/Orp/Sdk/Example`
 **5. getting data being written** <br>
 `mkdir logs`
 `chmod 0777 logs`
+`chown www-data:www-data logs`
 
 **6. Sign up** <br>
 Sign up at http://orp.plista.com <br>
