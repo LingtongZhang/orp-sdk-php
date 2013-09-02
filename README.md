@@ -65,9 +65,11 @@ For further details you may want to have a look at http://githowto.com/
 Have a look at the example provided in `classes/Plista/Orp/Sdk/Example`
 
 **5. getting data being written** <br>
-`mkdir logs`
-`chmod 0777 logs`
-`chown www-data:www-data logs`
+creating directory <br>
+`mkdir logs` <br>
+changing permissions <br>
+`chmod 0777 logs` <br>
+`chown www-data:www-data logs` <br>
 
 **6. Sign up** <br>
 Sign up at http://orp.plista.com <br>
