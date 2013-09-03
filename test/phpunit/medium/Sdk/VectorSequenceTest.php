@@ -8,6 +8,7 @@ require_once __DIR__ . '/../../../bootstrap.php';
 class VectorSequenceTest extends \PHPUnit_Framework_TestCase {
 
 	public function testFromJson() {
+	// in oder to avoid error messages during testing, remove /n and /t from JSON string example.
 		$example = '{
 			"type": "impression",
 			"context": {
